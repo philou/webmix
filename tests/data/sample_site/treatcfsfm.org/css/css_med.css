@@ -1,0 +1,77 @@
+/* CSS Document */
+
+.comman_text{
+font-family:Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#000000;
+}
+.comman_text a
+{
+ color:#0F89B2;
+ text-decoration:none;
+}
+.comman_text a:hover
+{
+ color:#00404F;
+ text-decoration:underline;
+}
+.sucess_storymid {
+  background:url(../images/news_bg.jpg) repeat-y left top;
+  width: 197px;
+  height: auto; /* 200px */
+  text-align: left;
+  padding: 10px 10px 0 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+
+.box1_text{
+font-family:Arial, Helvetica, sans-serif;
+font-size:14px;
+color:#000000;
+padding:10px 0 0 10px ;
+}	
+
+.side_contain{
+color:#000000;
+font-family:Arial,Helvetica,sans-serif;
+font-size:14px;
+text-align:left;
+background-color:#ffffff;
+height:200px;
+
+}
+
+.box-img1{
+background:url(../images/box-mid-img.jpg) no-repeat right top;
+	min-height:120px;
+	
+    padding:10px 90px 0 10px ;
+	width:209px;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#000000; 
+}
+.box-img2{
+	background:url(../images/box1-mid-img.jpg) no-repeat right top;
+	min-height:120px;
+	
+    padding:10px 90px 0 10px ;
+	width:209px;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#000000;
+   
+}
+.box-img3{
+	background:url(../images/box2-mid-img.jpg) no-repeat right top;
+	min-height:120px;
+	
+    padding:10px 90px 0 10px ;
+	width:209px;
+	font-family:Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#000000;
+   
+}

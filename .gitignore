@@ -19,7 +19,6 @@ build/
 .vscode/
 
 # Test data and artifacts
-/tests/data/sample_site/
 /tests/__pycache__/
 /tests/*.log
 
