@@ -13,10 +13,10 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
     *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
 
 ### Steps
-- [ ] **1. Project Scaffolding & Test Data**
-    - [ ] Initialize Poetry project with `pytest`, `pytest-bdd`, `trafilatura`, `requests`, `typer`.
-    - [ ] Create `README.md` and other meta info files.
-    - [ ] **Action:** Download a small subset of the target site (or a dummy site) into `tests/data/sample_site` to serve as our "Simulator" data source.
+- [x] **1. Project Scaffolding & Test Data**
+    - [x] Initialize Poetry project with `pytest`, `pytest-bdd`, `trafilatura`, `requests`, `typer`.
+    - [x] Create `README.md` and other meta info files.
+    - [x] **Action:** Download a small subset of the target site (or a dummy site) into `tests/data/sample_site` to serve as our "Simulator" data source.
 
 - [ ] **2. Feature 1: Discovery & TOC**
     - [ ] **Spec:** `features/discovery.feature`. Scenario: "Given a website root, discover pages and generate a Table of Contents."
