@@ -31,11 +31,11 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
         2.  **Directory Structure** (Tree view of the site)
         3.  **Files** (The actual content sections)
 
-- [ ] **2.5. Refactor: Switch to Filesystem-First Approach (Option B)**
-    - [ ] **Goal:** Simplify the architecture by assuming `wget` has already mirrored the site to a local directory. Remove the `Fetcher` abstraction.
-    - [ ] **Refactor `discovery.py`:** Instead of crawling links via `WebFetcher`, implement `discover_files(directory_path)` using `os.walk` to find all HTML files.
-    - [ ] **Refactor Tests:** Update `discovery.feature` and `test_discovery.py` to use "Given a local directory..." instead of "Given a website URL...".
-    - [ ] **Cleanup:** Remove `webmix/fetcher.py` and `HttpFetcher`.
+- [x] **2.5. Refactor: Switch to Filesystem-First Approach (Option B)**
+    - [x] **Goal:** Simplify the architecture by assuming `wget` has already mirrored the site to a local directory. Remove the `Fetcher` abstraction.
+    - [x] **Refactor `discovery.py`:** Instead of crawling links via `WebFetcher`, implement `discover_files(directory_path)` using `os.walk` to find all HTML files.
+    - [x] **Refactor Tests:** Update `discovery.feature` and `test_discovery.py` to use "Given a local directory..." instead of "Given a website URL...".
+    - [x] **Cleanup:** Remove `webmix/fetcher.py` and `HttpFetcher`.
 
 - [ ] **2.6. Manual Test Entrypoint**
     - [ ] **Goal:** Create a `main.py` or CLI entrypoint using `typer` to run the tool manually against a local folder.

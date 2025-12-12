@@ -1,37 +1,21 @@
-from typing import List, Set
-from urllib.parse import urljoin, urlparse
-from bs4 import BeautifulSoup
-from webmix.fetcher import WebFetcher
+import os
+from typing import List
 
-def discover_pages(start_url: str, fetcher: WebFetcher, max_pages: int = 100) -> List[str]:
-    visited: Set[str] = set()
-    queue: List[str] = [start_url]
-    found_pages: List[str] = []
+def discover_files(base_dir: str, extensions: List[str] = ['.html', '.htm']) -> List[str]:
+    """
+    Recursively find all files with specific extensions in a directory.
+    Returns a list of paths relative to the base_dir.
+    """
+    found_files = []
     
-    start_domain = urlparse(start_url).netloc
-
-    while queue and len(found_pages) < max_pages:
-        url = queue.pop(0)
-        if url in visited:
-            continue
-        
-        visited.add(url)
-        content = fetcher.get_content(url)
-        
-        if content:
-            found_pages.append(url)
-            soup = BeautifulSoup(content, 'html.parser')
-            
-            for link in soup.find_all('a'):
-                href = link.get('href')
-                if href:
-                    full_url = urljoin(url, href)
-                    # Normalize URL (remove fragment)
-                    full_url = full_url.split('#')[0]
-                    
-                    # Only follow links to same domain
-                    if urlparse(full_url).netloc == start_domain:
-                        if full_url not in visited and full_url not in queue:
-                            queue.append(full_url)
-                            
-    return found_pages
+    for root, _, files in os.walk(base_dir):
+        for file in files:
+            if any(file.lower().endswith(ext) for ext in extensions):
+                full_path = os.path.join(root, file)
+                # Get path relative to base_dir
+                rel_path = os.path.relpath(full_path, base_dir)
+                # Ensure forward slashes for consistency
+                rel_path = rel_path.replace(os.sep, '/')
+                found_files.append(rel_path)
+                
+    return sorted(found_files)
