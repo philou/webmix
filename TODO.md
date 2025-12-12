@@ -37,13 +37,13 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
     - [x] **Refactor Tests:** Update `discovery.feature` and `test_discovery.py` to use "Given a local directory..." instead of "Given a website URL...".
     - [x] **Cleanup:** Remove `webmix/fetcher.py` and `HttpFetcher`.
 
-- [ ] **2.6. Manual Test Entrypoint**
-    - [ ] **Goal:** Create a `main.py` or CLI entrypoint using `typer` to run the tool manually against a local folder.
-    - [ ] **Implementation:** `webmix/main.py` should accept a directory path and print the generated structure/TOC to stdout.
+- [x] **2.6. Manual Test Entrypoint**
+    - [x] **Goal:** Create a `main.py` or CLI entrypoint using `typer` to run the tool manually against a local folder.
+    - [x] **Implementation:** `webmix/main.py` should accept a directory path and print the generated structure/TOC to stdout.
 
-- [ ] **3. Feature 2: Content Extraction (Reader Mode)**
-    - [ ] **Spec:** `features/extraction.feature`. Scenario: "Given a local HTML file, return clean Markdown."
-    - [ ] **Test:** Read a specific HTML file from the `tests/data/sample_site` and assert the Markdown output is clean (no nav/ads).
+- [x] **3. Feature 2: Content Extraction (Reader Mode)**
+    - [x] **Spec:** `features/extraction.feature`. Scenario: "Given a local HTML file, return clean Markdown."
+    - [x] **Test:** Read a specific HTML file from the `tests/data/sample_site` and assert the Markdown output is clean (no nav/ads).
 
 - [ ] **4. Feature 3: Link Rewriting**
     - [ ] **Spec:** `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
