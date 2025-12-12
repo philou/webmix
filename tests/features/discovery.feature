@@ -14,7 +14,11 @@ Feature: Website Discovery
     Scenario: Generate Table of Contents and Structure
         Given the website "treatcfsfm.org" downloaded in local directory "tests/data/sample_site"
         And the website contains an "treatcfsfm.org/index.html" file
+        And the website contains an "treatcfsfm.org/detail-80-Getting-Through-the-Bad-Days.html" file
+        And the website contains an "treatcfsfm.org/detail-104-Learning-to-Manage-Fibromyalgia.html" file
         When I generate the site structure
         Then the output should contain "Directory Structure"
         And the output should contain "treatcfsfm.org/index.html"
+        And the output should contain "treatcfsfm.org/detail-80-Getting-Through-the-Bad-Days.html"
+        And the output should contain "treatcfsfm.org/detail-104-Learning-to-Manage-Fibromyalgia.html"
         And the output should contain "File Summary"
