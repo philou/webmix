@@ -18,31 +18,49 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
     - [x] Create `README.md` and other meta info files.
     - [x] **Action:** Download a small subset of the target site (or a dummy site) into `tests/data/sample_site` to serve as our "Simulator" data source.
 
-- [ ] **2. Feature 1: Discovery & TOC**
-    - [ ] **Spec:** `features/discovery.feature`. Scenario: "Given a website root, discover pages and generate a Table of Contents."
-    - [ ] **Sub-step: Core Abstraction (The Fetcher)**
-        - [ ] **Goal:** Define a `WebFetcher` protocol (interface) with methods like `get_html(url)` and `get_sitemap(url)`.
-        - [ ] **Implementations:**
-            - [ ] `HttpFetcher`: The real implementation using `requests`/`trafilatura`.
-            - [ ] `LocalFetcher`: The simulator that maps URLs to files in `tests/data/sample_site`.
-    - [ ] **Test:** Inject `LocalFetcher`. Verify it finds pages and returns a Markdown list of links to be used as the TOC.
-    - [ ] **Refinement:** The output format should mimic `repomix` structure:
+- [x] **2. Feature 1: Discovery & TOC (Initial Implementation)**
+    - [x] **Spec:** `features/discovery.feature`. Scenario: "Given a website root, discover pages and generate a Table of Contents."
+    - [x] **Sub-step: Core Abstraction (The Fetcher)**
+        - [x] **Goal:** Define a `WebFetcher` protocol (interface) with methods like `get_html(url)` and `get_sitemap(url)`.
+        - [x] **Implementations:**
+            - [x] `HttpFetcher`: The real implementation using `requests`/`trafilatura`.
+            - [x] `LocalFetcher`: The simulator that maps URLs to files in `tests/data/sample_site`.
+    - [x] **Test:** Inject `LocalFetcher`. Verify it finds pages and returns a Markdown list of links to be used as the TOC.
+    - [x] **Refinement:** The output format should mimic `repomix` structure:
         1.  **File Summary** (Purpose, Format, Usage)
         2.  **Directory Structure** (Tree view of the site)
         3.  **Files** (The actual content sections)
 
+- [ ] **2.5. Refactor: Switch to Filesystem-First Approach (Option B)**
+    - [ ] **Goal:** Simplify the architecture by assuming `wget` has already mirrored the site to a local directory. Remove the `Fetcher` abstraction.
+    - [ ] **Refactor `discovery.py`:** Instead of crawling links via `WebFetcher`, implement `discover_files(directory_path)` using `os.walk` to find all HTML files.
+    - [ ] **Refactor Tests:** Update `discovery.feature` and `test_discovery.py` to use "Given a local directory..." instead of "Given a website URL...".
+    - [ ] **Cleanup:** Remove `webmix/fetcher.py` and `HttpFetcher`.
+
+- [ ] **2.6. Manual Test Entrypoint**
+    - [ ] **Goal:** Create a `main.py` or CLI entrypoint using `typer` to run the tool manually against a local folder.
+    - [ ] **Implementation:** `webmix/main.py` should accept a directory path and print the generated structure/TOC to stdout.
+
 - [ ] **3. Feature 2: Content Extraction (Reader Mode)**
-    - [ ] **Spec:** `features/extraction.feature`. Scenario: "Given a raw HTML page, return clean Markdown."
-    - [ ] **Test:** Use `LocalFetcher` to retrieve a specific HTML file and assert the Markdown output is clean (no nav/ads).
+    - [ ] **Spec:** `features/extraction.feature`. Scenario: "Given a local HTML file, return clean Markdown."
+    - [ ] **Test:** Read a specific HTML file from the `tests/data/sample_site` and assert the Markdown output is clean (no nav/ads).
 
 - [ ] **4. Feature 3: Link Rewriting**
     - [ ] **Spec:** `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
     - [ ] **Test:** Verify `[Link](page2.html)` becomes `Link (see: Page 2 Title)` or similar clear text in the final output.
+    - [ ] **Note:** Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
 
 - [ ] **5. Feature 4: Aggregation**
     - [ ] **Spec:** `features/aggregation.feature`.
     - [ ] **Test:** Verify the final output starts with a TOC and contains all sections concatenated.
 
+- [ ] **6. Batch Script**
+    - [ ] Create a shell script `webmix.sh` (or similar) that:
+        1.  Takes a URL as input.
+        2.  Runs `wget` to mirror the site to a temporary folder.
+        3.  Runs `webmix` on that folder.
+        4.  Cleans up the temporary folder (optional).
+
 ### Parking
-- [ ] **Contract Testing:** We can write a generic test suite `test_fetcher_contract.py` that runs against *both* `HttpFetcher` (checking a known live URL) and `LocalFetcher` to ensure the simulator accurately mimics the real world.
-- [ ] **Rate Limiting:** The `HttpFetcher` should implement politeness (delays) which the `LocalFetcher` can ignore.
+- [ ] **Contract Testing:** (Deprecated - no longer needed with Filesystem approach)
+- [ ] **Rate Limiting:** (Handled by `wget`)
