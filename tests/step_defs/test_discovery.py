@@ -11,10 +11,27 @@ scenarios('../features/discovery.feature')
 def context():
     return {}
 
-@given(parsers.parse('a local directory "{path}"'))
-def local_directory(context, path):
-    # Resolve absolute path relative to project root
+@given(parsers.parse('the website "{website_name}" downloaded in local directory "{path}"'))
+def website_downloaded(context, website_name, path):
+    context['website_name'] = website_name
     context['base_dir'] = os.path.abspath(path)
+
+@given(parsers.parse('the website contains an "{filename}" file'))
+def website_contains_file(context, filename):
+    base_dir = context['base_dir']
+    file_path = os.path.join(base_dir, filename)
+    if not os.path.exists(file_path):
+        raise AssertionError(f"Input file not found: {file_path}")
+
+@given(parsers.parse('the website contains at least {count:d} files'))
+def website_contains_files(context, count):
+    base_dir = context['base_dir']
+    found = 0
+    for _, _, files in os.walk(base_dir):
+        found += len(files)
+    
+    if found < count:
+        raise AssertionError(f"Input directory has fewer files than expected: found {found}, expected >= {count}")
 
 @when('I discover the files')
 def discover(context):
