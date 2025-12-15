@@ -1,7 +1,7 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 from webmix.discovery import discover_files
-from webmix.structure import generate_repomix_output
+from webmix.structure import generate_webmix_output
 import os
 
 # Load scenarios
@@ -44,7 +44,7 @@ def generate_structure(context):
     if 'files' not in context:
         discover(context)
     
-    context['output'] = generate_repomix_output(context['files'])
+    context['output'] = generate_webmix_output(context['files'])
 
 @then(parsers.parse('I should find at least {count:d} files'))
 def check_file_count(context, count):

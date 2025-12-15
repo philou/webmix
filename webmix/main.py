@@ -2,9 +2,16 @@ import typer
 from typing import Optional
 from pathlib import Path
 from webmix.discovery import discover_files
-from webmix.structure import generate_repomix_output
+from webmix.structure import generate_webmix_output
 
 app = typer.Typer()
+
+def aggregate_website(directory_path: str) -> str:
+    """
+    Discover files in the directory and generate the aggregated Markdown output.
+    """
+    files = discover_files(directory_path)
+    return generate_webmix_output(files, base_dir=directory_path)
 
 @app.command()
 def main(
@@ -18,10 +25,7 @@ def main(
         typer.echo(f"Error: Directory '{directory}' does not exist.", err=True)
         raise typer.Exit(code=1)
 
-    files = discover_files(str(directory))
-    
-    # For now, we only have the structure generation part implemented
-    result = generate_repomix_output(files)
+    result = aggregate_website(str(directory))
     
     if output:
         with open(output, 'w', encoding='utf-8') as f:

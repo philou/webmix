@@ -45,14 +45,14 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
     - [x] **Spec:** `features/extraction.feature`. Scenario: "Given a local HTML file, return clean Markdown."
     - [x] **Test:** Read a specific HTML file from the `tests/data/sample_site` and assert the Markdown output is clean (no nav/ads).
 
-- [ ] **4. Feature 3: Link Rewriting**
+- [x] **4. Feature 3: Aggregation**
+    - [x] **Spec:** `features/aggregation.feature`.
+    - [x] **Test:** Verify the final output starts with a TOC and contains all sections concatenated.
+
+- [ ] **5. Feature 4: Link Rewriting**
     - [ ] **Spec:** `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
     - [ ] **Test:** Verify `[Link](page2.html)` becomes `Link (see: Page 2 Title)` or similar clear text in the final output.
     - [ ] **Note:** Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
-
-- [ ] **5. Feature 4: Aggregation**
-    - [ ] **Spec:** `features/aggregation.feature`.
-    - [ ] **Test:** Verify the final output starts with a TOC and contains all sections concatenated.
 
 - [ ] **6. Batch Script**
     - [ ] Create a shell script `webmix.sh` (or similar) that:
