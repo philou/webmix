@@ -50,9 +50,10 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Test: Verify the final output starts with a TOC and contains all sections concatenated.
 
 - [ ] Feat: Link Rewriting
-    - [ ] Spec: `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
-    - [ ] Test: Verify `[Link](page2.html)` becomes `Link (see: Page 2 Title)` or similar clear text in the final output.
-    - [ ] Note: Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
+    - [x] Spec: `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
+    - [x] Test: Verify `[Link](page2.html)` becomes `Link (see: Page 2 Title)` or similar clear text in the final output.
+    - Note: Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
+    - [ ] There is hard coded reference to the sample website 'treatcfsfm.org/' in rewrite_link. There should not.
 
 - [ ] Batch Script
     - [ ] Create a shell script `webmix.sh` (or similar) that:
@@ -61,6 +62,29 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         3.  Runs `webmix` on that folder.
         4.  Cleans up the temporary folder (optional).
 
+- [ ] Refactor: remove duplicated feature step definition
+
+- [ ] Feat: alt text for images
+
+- [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
+
+
 ### Parking
+- [ ] Review specs to have more domain context, and create a glossary
 - [ ] refactor the Discovery and ToC tests to use builders instead of a full website
 - [ ] strip out files from the sample data to have faster tests
+- Agentic BDD experimenting
+    - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
+    - [ ] Create an agent to follow a flow:
+        - Walking Skeleton
+        - Pause after specs for reviews
+        - Do implementation
+        - Review BDD/DDD:
+            - Vocab missing
+            - Docs still up to date
+            - ADRs to write
+        - Pause for review and commit
+    - [ ] Instructions for this style of TODO.md
+    - [ ] Instructions for testing strategy (builders vs website)
+    - [ ] Instruction for mixed "risk-aware + conventional" commit messages
+- [ ] Feat: filter out remaining noise (there are some "|" remaining here and there)
