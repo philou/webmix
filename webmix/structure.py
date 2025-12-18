@@ -59,7 +59,7 @@ def generate_files_content(base_dir: str, files: List[str]) -> str:
     
     for relative_path in sorted_files:
         full_path = os.path.join(base_dir, relative_path)
-        content = extract_content(full_path, link_map=link_map)
+        content = extract_content(full_path, link_map=link_map, current_path=relative_path)
         
         if content:
             content_section += f"## {relative_path}\n\n"

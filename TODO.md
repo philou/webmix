@@ -49,11 +49,11 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Spec: `features/aggregation.feature`.
     - [x] Test: Verify the final output starts with a TOC and contains all sections concatenated.
 
-- [ ] Feat: Link Rewriting
+- [x] Feat: Link Rewriting
     - [x] Spec: `features/linking.feature`. Scenario: "Links between pages are converted to explicit textual references."
     - [x] Test: Verify `[Link](page2.html)` becomes `Link (see: Page 2 Title)` or similar clear text in the final output.
     - Note: Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
-    - [ ] There is hard coded reference to the sample website 'treatcfsfm.org/' in rewrite_link. There should not.
+    - [x] There is hard coded reference to the sample website 'treatcfsfm.org/' in rewrite_link. There should not.
 
 - [ ] Batch Script
     - [ ] Create a shell script `webmix.sh` (or similar) that:
