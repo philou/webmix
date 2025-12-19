@@ -4,14 +4,6 @@ We will build a Python CLI tool to crawl, extract (Reader Mode), and aggregate a
 
 Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (Reader Mode), so we don't need to implement complex sanitization logic ourselves.
 
-### Testing Strategy (Split Approach)
-*   For Structural Logic (Discovery, Linking, Aggregation): Use Builders.
-    *   *Why:* We care about the graph/links, not the messy HTML content.
-    *   *How:* `Given a site with pages: | url | title | content |` (Generates simple HTML on the fly).
-*   For Parsing Logic (Extraction): Use Hybrid (Fixtures + Assertions).
-    *   *Why:* We need realistic, messy HTML (ads, scripts) to test `trafilatura`, but we also need readable tests.
-    *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
-
 ### Steps
 - [x] Project Scaffolding & Test Data
     - [x] Initialize Poetry project with `pytest`, `pytest-bdd`, `trafilatura`, `requests`, `typer`.
@@ -67,7 +59,9 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] disable the batch.feature tests by default.
         - [x] also fix the warnings when running the tests (unknown @slow @network tags...)
 
-- Agentic BDD experimenting
+- Doc: Agentic BDD experimenting
+    - [x] Instructions for this style of TODO.md
+    - [ ] Instruction for mixed "risk-aware + conventional" commit messages
     - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
     - [ ] Create an agent to follow a flow:
         - Walking Skeleton
@@ -79,9 +73,6 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
             - ADRs to write
             - duplication in tests and steps
         - Pause for review and commit
-    - [ ] Instructions for this style of TODO.md
-    - [ ] Instructions for testing strategy (builders vs website)
-    - [ ] Instruction for mixed "risk-aware + conventional" commit messages
 
 - [ ] Review specs to have more domain context, and create a glossary (Experiment with custom agent here?), and improve README
 
@@ -94,5 +85,11 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 
 ### Parking
 - [ ] refactor the Discovery and ToC tests to use builders instead of a full website
+    *   For Structural Logic (Discovery, Linking, Aggregation): Use Builders.
+        *   *Why:* We care about the graph/links, not the messy HTML content.
+        *   *How:* `Given a site with pages: | url | title | content |` (Generates simple HTML on the fly).
+    *   For Parsing Logic (Extraction): Use Hybrid (Fixtures + Assertions).
+        *   *Why:* We need realistic, messy HTML (ads, scripts) to test `trafilatura`, but we also need readable tests.
+        *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: filter out remaining noise (there are some "|" remaining here and there)
