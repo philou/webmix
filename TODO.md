@@ -55,24 +55,17 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - Note: Since `wget --convert-links` makes links relative, we just need to resolve them to the target file's title/anchor.
     - [x] There is hard coded reference to the sample website 'treatcfsfm.org/' in rewrite_link. There should not.
 
-- [ ] Batch Script
-    - [ ] Create a shell script `webmix.sh` (or similar) that:
+- [x] Batch Script
+    - [x] Create a shell script `webmix.sh` (or similar) that:
         1.  Takes a URL as input.
-        2.  Runs `wget` to mirror the site to a temporary folder.
+        2.  Runs `wget` to mirror the site to a temporary folder. If given an url with a subfolder, it should download what it under this subfolder, not the whole domain (ex: with https://philippe.bourgau.net/storexplore/, dont' download the whole https://philippe.bourgau.net/). I think this is the --no-parent option of wget
         3.  Runs `webmix` on that folder.
         4.  Cleans up the temporary folder (optional).
+    - [x] Add a feature test for this too
+        - make it disabled by default so that it does not slow down other tests, and does not fail when we don't have an internet connection.
+        - use the website https://philippe.bourgau.net/complexity-assert/ as an example: it's small and fast
+    - [ ] disable it by default (and fix the warnings for unknown tags)
 
-- [ ] Refactor: remove duplicated feature step definition
-
-- [ ] Feat: alt text for images
-
-- [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
-
-
-### Parking
-- [ ] Review specs to have more domain context, and create a glossary
-- [ ] refactor the Discovery and ToC tests to use builders instead of a full website
-- [ ] strip out files from the sample data to have faster tests
 - Agentic BDD experimenting
     - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
     - [ ] Create an agent to follow a flow:
@@ -83,8 +76,22 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
             - Vocab missing
             - Docs still up to date
             - ADRs to write
+            - duplication in tests and steps
         - Pause for review and commit
     - [ ] Instructions for this style of TODO.md
     - [ ] Instructions for testing strategy (builders vs website)
     - [ ] Instruction for mixed "risk-aware + conventional" commit messages
+
+- [ ] Review specs to have more domain context, and create a glossary (Experiment with custom agent here?)
+
+- [ ] Refactor: remove duplicated feature step definition
+
+- [ ] Feat: alt text for images
+
+- [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
+
+
+### Parking
+- [ ] refactor the Discovery and ToC tests to use builders instead of a full website
+- [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: filter out remaining noise (there are some "|" remaining here and there)
