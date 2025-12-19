@@ -62,6 +62,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 - Doc: Agentic BDD experimenting
     - [x] Instructions for this style of TODO.md
     - [x] Instruction for mixed "risk-aware + conventional" commit messages
+    - [x] Instructions for BDD/Gherkin style (EARS + Rules)
     - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
     - [ ] Create an agent to follow a flow:
         - Walking Skeleton
