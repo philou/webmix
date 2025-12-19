@@ -1,6 +1,9 @@
+---
+description: Guidelines for writing risk-aware commit messages using Arlo's Commit Notation and Conventional Commits.
+---
 # Risk-Aware + Conventional Commit Messages Instructions
 
-When generating commit messages, you must follow this specific format that combines **Arlo's Commit Notation** (Risk Assessment) and **Conventional Commits**.
+When generating commit messages, you must follow this specific format that combines [**Arlo's Commit Notation**](https://github.com/RefactoringCombos/ArlosCommitNotation) (Risk Assessment) and [**Conventional Commits**](https://www.conventionalcommits.org/).
 
 ## Cheat Sheet
 
@@ -84,6 +87,9 @@ Follow the [Conventional Commits](https://www.conventionalcommits.org/) specific
 ## 5. Special Cases
 *   **Reverts:** Use `revert: <header of reverted commit>`. In the body, say "This reverts commit <hash>."
 *   **WIP:** `@ ` commits should generally be squashed or cleaned up before merging to the main branch.
+*   **TODO Updates:** When updating `TODO.md` or similar task lists:
+    *   Do **not** list every checked item in the body (e.g., avoid "- Checked item A").
+    *   Briefly mention structural changes (e.g., "- Added new tasks for X", "- Reordered steps").
 
 ---
 
