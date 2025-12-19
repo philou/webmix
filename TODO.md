@@ -64,7 +64,8 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Add a feature test for this too
         - make it disabled by default so that it does not slow down other tests, and does not fail when we don't have an internet connection.
         - use the website https://philippe.bourgau.net/complexity-assert/ as an example: it's small and fast
-    - [ ] disable it by default (and fix the warnings for unknown tags)
+    - [x] disable the batch.feature tests by default.
+        - [x] also fix the warnings when running the tests (unknown @slow @network tags...)
 
 - Agentic BDD experimenting
     - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
@@ -82,7 +83,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [ ] Instructions for testing strategy (builders vs website)
     - [ ] Instruction for mixed "risk-aware + conventional" commit messages
 
-- [ ] Review specs to have more domain context, and create a glossary (Experiment with custom agent here?)
+- [ ] Review specs to have more domain context, and create a glossary (Experiment with custom agent here?), and improve README
 
 - [ ] Refactor: remove duplicated feature step definition
 
