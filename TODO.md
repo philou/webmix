@@ -63,7 +63,8 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Instructions for this style of TODO.md
     - [x] Instruction for mixed "risk-aware + conventional" commit messages
     - [x] Instructions for BDD/Gherkin style (EARS + Rules)
-    - [ ] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
+    - [x] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
+    - [x] Add instructions for a glossary file. Maybe try with contextize
     - [ ] Create an agent to follow a flow:
         - Walking Skeleton
         - Pause after specs for reviews
