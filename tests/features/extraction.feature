@@ -21,3 +21,11 @@ Feature: Content Extraction
       Then the output should not contain "Home"
       And the output should not contain "Contact Us"
       And the output should not contain "Self-Appraisal"
+
+  Rule: Where images are present in the content, the system shall preserve their alt text.
+
+    Scenario: Extract alt text from images
+      Given the website "treatcfsfm.org" downloaded in local directory "tests/data/sample_site"
+      And the file "treatcfsfm.org/menubar-Pacing-vs.-Push-and-Crash-148.html" contains "alt="The Push/Crash Cycle""
+      When I extract the content from "treatcfsfm.org/menubar-Pacing-vs.-Push-and-Crash-148.html"
+      Then the output should contain "![The Push/Crash Cycle The Push/Crash Cycle]"

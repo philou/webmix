@@ -35,7 +35,7 @@ def extract_content(file_path: str, link_map: Optional[Dict[str, str]] = None, c
             
     # Get Markdown content using extract()
     # We need to ensure links are preserved.
-    text = trafilatura.extract(html_content, output_format='markdown', include_links=True)
+    text = trafilatura.extract(html_content, output_format='markdown', include_links=True, include_images=True)
     
     # Construct Markdown
     output = []

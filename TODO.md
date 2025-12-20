@@ -81,7 +81,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 
 - [x] Refactor: remove duplicated feature step definition
 
-- [ ] Feat: alt text for images
+- [x] Feat: alt text for images
 
 - [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
 

@@ -19,6 +19,15 @@ The phase where the system identifies which files or pages belong to the target 
 *   **Artifact:** A list of file paths or a tree structure.
 
 ### Extraction
+The process of parsing an HTML file and converting its main content into Markdown.
+*   **Tool:** `trafilatura`.
+*   **Features:** Link rewriting, image preservation (alt text).
+
+### Alt Text
+Alternative text provided for images, used for accessibility and preserved during extraction to maintain context in the Markdown output.
+
+
+### Extraction
 The process of parsing a single HTML file and converting its main content into clean Markdown.
 *   **Mechanism:** Uses `trafilatura` (Reader Mode).
 *   **Goal:** Remove navigation, ads, footers, and boilerplate.
