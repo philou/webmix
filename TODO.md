@@ -65,11 +65,11 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Instructions for BDD/Gherkin style (EARS + Rules)
     - [x] Create or customize an agent to write the specs, maybe asking me questions (Example Mapping style?)
     - [x] Add instructions for a glossary file. Maybe try with contextize
-    - [ ] Create an agent to follow a flow:
+    - [x] Create an agent to follow a flow:
         - Walking Skeleton
         - Pause after specs for reviews
         - Do implementation
-        - Review BDD/DDD:
+        - Review Living Documentation:
             - Vocab missing
             - Docs still up to date
             - ADRs to write
