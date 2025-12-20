@@ -10,13 +10,16 @@ Think of it as `repomix` but for websites.
 
 When working with LLMs, you often want to provide documentation or content from a website as context. Copy-pasting page by page is tedious, and raw HTML is noisy. Webmix solves this by:
 
-1.  **Crawling** a target website to discover relevant pages.
-2.  **Extracting** the main content using robust "Reader Mode" logic (powered by `trafilatura`), stripping away navigation, ads, and footers.
-3.  **Aggregating** everything into a single file with a clear Table of Contents and structure.
+1.  **Mirroring** a target website to a local directory (via `wget`).
+2.  **Discovering** relevant HTML files in the local mirror.
+3.  **Extracting** the main content using robust "Reader Mode" logic (powered by `trafilatura`), stripping away navigation, ads, and footers.
+4.  **Rewriting Links** to preserve context by converting internal links to explicit textual references (e.g., `[Link](...) (see: Page Title)`).
+5.  **Aggregating** everything into a single file with a clear Table of Contents and structure.
 
 ## Features
 
-- **Smart Discovery**: Automatically finds pages within the same domain.
+- **Batch Processing**: One-shot command to download and aggregate a site.
+- **Smart Discovery**: Automatically finds pages within the local mirror.
 - **Clean Extraction**: Converts HTML to noise-free Markdown.
 - **Link Rewriting**: Preserves context by converting internal links to explicit textual references.
 - **Structured Output**: Generates a `repomix`-style output with:
@@ -30,6 +33,7 @@ When working with LLMs, you often want to provide documentation or content from 
 
 - Python 3.10+
 - [Poetry](https://python-poetry.org/) for dependency management.
+- `wget` (for the batch script).
 
 ### Installation
 
@@ -43,13 +47,25 @@ poetry install
 
 ## Usage
 
-> [!NOTE]
-> Webmix is currently under active development. The CLI commands below are planned.
+### Batch Mode (Recommended)
 
-To convert a website:
+To download and convert a website in one go:
 
 ```bash
-poetry run webmix https://example.com --output example_site.md
+./webmix.sh <url> [output_file]
+```
+
+Example:
+```bash
+./webmix.sh https://example.com example_site.md
+```
+
+### Manual Mode
+
+If you already have a local mirror of a website:
+
+```bash
+poetry run webmix <directory_path> --output <output_file>
 ```
 
 ## Development
@@ -61,8 +77,11 @@ Webmix uses **Agentic BDD** (Behavior Driven Development) with `pytest-bdd`.
 We use a split testing strategy with a **Local Website Simulator** to ensure fast, deterministic tests without hitting real endpoints.
 
 ```bash
-# Run all tests
+# Run default tests (Fast & Offline)
 poetry run pytest
+
+# Run ALL tests (Including Slow & Network)
+poetry run pytest -o "addopts="
 
 # Run specific feature specs
 poetry run pytest tests/features/discovery.feature
@@ -73,11 +92,15 @@ poetry run pytest tests/features/discovery.feature
 - `webmix/`: Source code.
 - `tests/`: BDD features and step definitions.
 - `tests/data/sample_site/`: Local simulator data (real downloaded site).
+- `webmix.sh`: Batch processing script.
 
 ## Roadmap
 
 - [x] Project Scaffolding & Simulator Setup
-- [ ] Feature 1: Discovery & TOC
-- [ ] Feature 2: Content Extraction
-- [ ] Feature 3: Link Rewriting
-- [ ] Feature 4: Aggregation
+- [x] Feature 1: Discovery & TOC
+- [x] Feature 2: Content Extraction
+- [x] Feature 3: Link Rewriting
+- [x] Feature 4: Aggregation
+- [x] Batch Script
+- [ ] Alt text for images
+- [ ] Breadcrumbs, hierarchical extraction (follow sitemap in ToC)

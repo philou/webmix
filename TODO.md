@@ -77,7 +77,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - Pause for review and commit
 
 - [x] Review specs to have more domain context
-- [ ] Review and improve README
+- [x] Review and improve README
 
 - [ ] Refactor: remove duplicated feature step definition
 
