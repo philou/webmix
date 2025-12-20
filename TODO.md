@@ -76,7 +76,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
             - duplication in tests and steps
         - Pause for review and commit
 
-- [ ] Review specs to have more domain context, and create a glossary (Experiment with custom agent here?), and improve README
+- [ ] Review specs to have more domain context and improve README
 
 - [ ] Refactor: remove duplicated feature step definition
 
