@@ -7,15 +7,6 @@ import os
 # Load scenarios
 scenarios('../features/discovery.feature')
 
-@pytest.fixture
-def context():
-    return {}
-
-@given(parsers.parse('the website "{website_name}" downloaded in local directory "{path}"'))
-def website_downloaded(context, website_name, path):
-    context['website_name'] = website_name
-    context['base_dir'] = os.path.abspath(path)
-
 @given(parsers.parse('the website contains an "{filename}" file'))
 def website_contains_file(context, filename):
     base_dir = context['base_dir']
@@ -54,6 +45,3 @@ def check_file_count(context, count):
 def check_file_exists(context, path):
     assert path in context['files']
 
-@then(parsers.parse('the output should contain "{text}"'))
-def check_output_contains(context, text):
-    assert text in context['output']

@@ -79,7 +79,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 - [x] Review specs to have more domain context
 - [x] Review and improve README
 
-- [ ] Refactor: remove duplicated feature step definition
+- [x] Refactor: remove duplicated feature step definition
 
 - [ ] Feat: alt text for images
 
