@@ -12,12 +12,39 @@ This file contains the content of {len(files)} pages from the website.
 def generate_directory_structure(files: List[str]) -> str:
     structure = "# Directory Structure\n\n"
     
-    # Files are already relative paths
-    sorted_files = sorted(files)
-    
-    for path in sorted_files:
-        structure += f"- {path}\n"
-        
+    # Build tree
+    tree = {}
+    for path in sorted(files):
+        parts = path.split('/')
+        current = tree
+        for i, part in enumerate(parts):
+            if i == len(parts) - 1:
+                # File
+                current[part] = None
+            else:
+                # Directory
+                if part not in current:
+                    current[part] = {}
+                current = current[part]
+                
+    # Format tree
+    def format_tree(node, indent=0):
+        output = ""
+        # Sort keys: directories first or files first? 
+        # Usually mixed, alphabetical.
+        for key in sorted(node.keys()):
+            value = node[key]
+            prefix = "  " * indent
+            if value is None:
+                # File
+                output += f"{prefix}- {key}\n"
+            else:
+                # Directory
+                output += f"{prefix}- {key}/\n"
+                output += format_tree(value, indent + 1)
+        return output
+
+    structure += format_tree(tree)
     return structure
 
 def build_link_map(base_dir: str, files: List[str]) -> Dict[str, str]:

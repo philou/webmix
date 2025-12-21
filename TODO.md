@@ -87,7 +87,8 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - not pause so often (eats up premium requests)
     - pause before the commit! Actually, I will be doing the commit
 
-- [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
+- [ ] Feat: Breadcrumbs, hierarchical extraction
+    - Bonus: if there is a form of hierarchy in sitemap (xml or html), then follow it in the Table Of Content
 
 
 ### Parking

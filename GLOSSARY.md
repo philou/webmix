@@ -22,15 +22,10 @@ The phase where the system identifies which files or pages belong to the target 
 The process of parsing an HTML file and converting its main content into Markdown.
 *   **Tool:** `trafilatura`.
 *   **Features:** Link rewriting, image preservation (alt text).
+*   **Goal:** Remove navigation, ads, footers, and boilerplate.
 
 ### Alt Text
 Alternative text provided for images, used for accessibility and preserved during extraction to maintain context in the Markdown output.
-
-
-### Extraction
-The process of parsing a single HTML file and converting its main content into clean Markdown.
-*   **Mechanism:** Uses `trafilatura` (Reader Mode).
-*   **Goal:** Remove navigation, ads, footers, and boilerplate.
 
 ### Link Rewriting
 The transformation of internal hyperlinks (pointing to other HTML files) into internal Markdown anchors (pointing to sections within the aggregated file).
@@ -46,7 +41,8 @@ The specific heuristic used during **Extraction** to identify the "meat" of an a
 
 ### Structure Generation
 The process of creating the **Table of Contents** and **Directory Structure** visualization from the discovered files.
-*   **Output:** A tree view and a list of links at the start of the aggregated file.
+*   **Output:** A hierarchical tree view reflecting the directory structure.
+
 
 ### Table of Contents (TOC)
 The hierarchical list of links generated at the beginning of the aggregated file, reflecting the structure of the **Local Mirror**.

@@ -24,7 +24,7 @@ When working with LLMs, you often want to provide documentation or content from 
 - **Link Rewriting**: Preserves context by converting internal links to explicit textual references.
 - **Structured Output**: Generates a `repomix`-style output with:
     - File Summary
-    - Directory Structure / Sitemap
+    - Hierarchical Directory Structure / Sitemap
     - Concatenated Content
 
 ## Getting Started
