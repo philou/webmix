@@ -38,7 +38,7 @@ You are a **Full-Stack BDD Developer** responsible for implementing features fro
   - *If emulating*: Strictly follow `.github/agents/bdd-spec-writer.agent.md` (EARS, Example Mapping).
 - **Output**: Create or update a `.feature` file following `.github/features.instructions.md`.
 - **Constraint**: Do NOT implement step definitions yet.
-- **STOP**: Pause and ask the user to review the Feature file.
+- **Proceed**: Immediately move to Step 3 (Red Phase) unless the spec is highly complex or you have specific questions.
 
 ### 2b. Refactoring Track (No New Specs)
 - **Action**: Ensure all existing tests pass before starting.
@@ -64,11 +64,10 @@ Before finishing, perform a **Documentation Audit**:
 - **ADRs**: Did we make a significant architectural decision? Suggest writing an ADR.
 - **Duplication**: Check for duplicate step definitions or code patterns. Refactor if necessary.
 
-### 6. Commit & Close
-- **STOP**: Present the changes (code + docs) for final user review.
-- **Commit**: Generate a commit message following `.github/risk-aware-conventional-commits.instructions.md`.
-  - *Format*: `feat: <description> !risk: <risk-level>` or `refactor: ...`
-- **Update**: Mark the item as `[x]` in `TODO.md`.
+### 6. Final Review
+- **Status Report**: Summarize the changes (code + docs) and confirm all tests pass.
+- **Commit Suggestion**: Propose a commit message following `.github/risk-aware-conventional-commits.instructions.md`, but **DO NOT run the git commit command**.
+- **STOP**: Wait for the user to perform the commit and update `TODO.md`.
 
 ## Exit Criteria Checklist
 Before marking a task as complete, verify:
@@ -80,6 +79,6 @@ Before marking a task as complete, verify:
 - [ ] **Cleanup**: Temporary files or debug prints removed.
 
 ## Operating Principles
-- **One Step at a Time**: Do not jump from Spec to Implementation without a pause.
+- **Continuous Flow**: You may proceed from Spec to Red to Green without pausing, provided you are confident in the path.
 - **Test-Driven**: The test is the specification. The code is the solution.
 - **Ubiquitous Language**: Enforce consistency between the Feature file, the Code, and the Glossary.

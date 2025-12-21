@@ -83,6 +83,10 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 
 - [x] Feat: alt text for images
 
+- [x] Ask BDD developer agent to
+    - not pause so often (eats up premium requests)
+    - pause before the commit! Actually, I will be doing the commit
+
 - [ ] Feat: Breadcrumbs, hierarchical extraction (follow sitemap in ToC)
 
 
