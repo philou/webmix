@@ -79,12 +79,12 @@ def build_link_map(base_dir: str, files: List[str]) -> Dict[str, str]:
 
 def generate_files_content(base_dir: str, files: List[str]) -> str:
     content_section = "# Files\n\n"
-    sorted_files = sorted(files)
+    # Do not sort files here, respect the order provided (e.g. from sitemap)
     
     # Build the link map first
     link_map = build_link_map(base_dir, files)
     
-    for relative_path in sorted_files:
+    for relative_path in files:
         full_path = os.path.join(base_dir, relative_path)
         content = extract_content(full_path, link_map=link_map, current_path=relative_path)
         

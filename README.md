@@ -20,6 +20,7 @@ When working with LLMs, you often want to provide documentation or content from 
 
 - **Batch Processing**: One-shot command to download and aggregate a site.
 - **Smart Discovery**: Automatically finds pages within the local mirror.
+- **Sitemap Support**: Automatically uses `sitemap.xml` (if present) to determine the reading order of pages.
 - **Clean Extraction**: Converts HTML to noise-free Markdown.
 - **Link Rewriting**: Preserves context by converting internal links to explicit textual references.
 - **Structured Output**: Generates a `repomix`-style output with:
