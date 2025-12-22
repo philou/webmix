@@ -44,7 +44,7 @@ elif [ -n "$VIRTUAL_ENV" ]; then
     CMD="python3 -m webmix.main"
 else
     # 3. Standalone usage (User)
-    CMD="poetry run webmix"
+    CMD="uv run webmix"
 fi
 
 $CMD "$WORK_DIR" --output "$OUTPUT_FILE"

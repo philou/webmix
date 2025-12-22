@@ -32,7 +32,7 @@ When working with LLMs, you often want to provide documentation or content from 
 ### Prerequisites
 
 - Python 3.10+
-- [Poetry](https://python-poetry.org/) for dependency management.
+- [uv](https://github.com/astral-sh/uv) for dependency management.
 - `wget` (for the batch script).
 
 ### Installation
@@ -42,7 +42,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/yourusername/webmix.git
 cd webmix
-poetry install
+uv sync
 ```
 
 ## Usage
@@ -65,7 +65,7 @@ Example:
 If you already have a local mirror of a website:
 
 ```bash
-poetry run webmix <directory_path> --output <output_file>
+uv run webmix <directory_path> --output <output_file>
 ```
 
 ## Development
@@ -78,13 +78,13 @@ We use a split testing strategy with a **Local Website Simulator** to ensure fas
 
 ```bash
 # Run default tests (Fast & Offline)
-poetry run pytest
+uv run pytest
 
 # Run ALL tests (Including Slow & Network)
-poetry run pytest -o "addopts="
+uv run pytest -o "addopts="
 
 # Run specific feature specs
-poetry run pytest tests/features/discovery.feature
+uv run pytest tests/features/discovery.feature
 ```
 
 ### Project Structure

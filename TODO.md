@@ -87,8 +87,17 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - not pause so often (eats up premium requests)
     - pause before the commit! Actually, I will be doing the commit
 
-- [ ] Feat: Breadcrumbs, hierarchical extraction
-    - Bonus: if there is a form of hierarchy in sitemap (xml or html), then follow it in the Table Of Content
+- [x] Feat: Breadcrumbs, hierarchical extraction
+
+- [x] Refactor: Migrate to uv
+
+- [ ] Feat: Sitemaps. Rely on the sitemap hierarchy rather than folder structure to build the Table of Content
+    - [ ] If the website has a ./sitemap.xml: Automatically use the hierarchy found in the sitemap.xml to buidl the table of content. (You might need to look at the specifications of sitemap xml to know how to rebuild the hierarchy)
+    - [ ] If the website has no sitemap.xml, use subdirectory structure as we are already doing
+
+- [ ] Feat: sitemap option. It should be possible to override the sitemap (or the absence of sitemap) by passing in an optional local sitemap file through the command line.
+
+- [ ] Feat: Create a small standalone app that builds a sitemap.xml from the the sample website treatcfsfm.org which has a sitemap.php.html file that is not xml. You'll need to do some form of scrapping or parsing, It uses html nesting depth and custom classes to represent the hierarchy of topics.
 
 
 ### Parking
