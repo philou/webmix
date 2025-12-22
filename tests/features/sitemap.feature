@@ -23,14 +23,14 @@ Feature: Sitemap Support
         | /about |
         | /contact |
 
-#   Rule: Where a sitemap is explicitly provided, the system shall use it instead of auto-discovery.
+  Rule: Where a sitemap is explicitly provided, the system shall use it instead of auto-discovery.
 
-#     Scenario: Override with CLI argument
-#       Given a local mirror of "simple-site"
-#       And the site contains "sitemap.xml"
-#       And the site contains "custom-sitemap.xml"
-#       When I generate the webmix with argument "--sitemap custom-sitemap.xml"
-#       Then the structure should be generated from "custom-sitemap.xml"
+    Scenario: Override with CLI argument
+      Given a local mirror of "simple-site"
+      And the site contains "sitemap.xml"
+      And the site contains "custom-sitemap.xml"
+      When I generate the webmix with argument "--sitemap custom-sitemap.xml"
+      Then the structure should be generated from "custom-sitemap.xml"
 
   Rule: If no sitemap is available, then the system shall fallback to directory structure.
 

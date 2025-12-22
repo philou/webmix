@@ -6,17 +6,18 @@ from webmix.structure import generate_webmix_output
 
 app = typer.Typer()
 
-def aggregate_website(directory_path: str) -> str:
+def aggregate_website(directory_path: str, sitemap_path: Optional[str] = None) -> str:
     """
     Discover files in the directory and generate the aggregated Markdown output.
     """
-    files = discover_files(directory_path)
+    files = discover_files(directory_path, sitemap_path=sitemap_path)
     return generate_webmix_output(files, base_dir=directory_path)
 
 @app.command()
 def main(
     directory: Path = typer.Argument(..., help="The directory containing the website files"),
-    output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output file path (default: stdout)")
+    output: Optional[Path] = typer.Option(None, "--output", "-o", help="Output file path (default: stdout)"),
+    sitemap: Optional[str] = typer.Option(None, "--sitemap", help="Path to a custom sitemap.xml file (relative to directory or absolute)")
 ):
     """
     Convert a local website directory into a single LLM-friendly Markdown file.
@@ -25,7 +26,7 @@ def main(
         typer.echo(f"Error: Directory '{directory}' does not exist.", err=True)
         raise typer.Exit(code=1)
 
-    result = aggregate_website(str(directory))
+    result = aggregate_website(str(directory), sitemap_path=sitemap)
     
     if output:
         with open(output, 'w', encoding='utf-8') as f:

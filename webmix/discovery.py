@@ -1,21 +1,29 @@
 import os
 import xml.etree.ElementTree as ET
-from typing import List
+from typing import List, Optional
 from urllib.parse import urlparse
 
-def discover_files(base_dir: str, extensions: List[str] = ['.html', '.htm']) -> List[str]:
+def discover_files(base_dir: str, extensions: List[str] = ['.html', '.htm'], sitemap_path: Optional[str] = None) -> List[str]:
     """
     Recursively find all files with specific extensions in a directory.
     Returns a list of paths relative to the base_dir.
-    If sitemap.xml exists, uses it to determine the file order.
+    If sitemap_path is provided, uses it.
+    If not, checks for sitemap.xml in base_dir.
     """
-    # Check for sitemap.xml
-    sitemap_path = os.path.join(base_dir, "sitemap.xml")
-    if os.path.exists(sitemap_path):
+    # Determine sitemap path
+    target_sitemap = None
+    if sitemap_path:
+        target_sitemap = sitemap_path if os.path.isabs(sitemap_path) else os.path.join(base_dir, sitemap_path)
+    else:
+        potential_sitemap = os.path.join(base_dir, "sitemap.xml")
+        if os.path.exists(potential_sitemap):
+            target_sitemap = potential_sitemap
+
+    if target_sitemap and os.path.exists(target_sitemap):
         try:
-            return discover_files_from_sitemap(base_dir, sitemap_path)
+            return discover_files_from_sitemap(base_dir, target_sitemap)
         except Exception as e:
-            print(f"Warning: Failed to parse sitemap.xml: {e}. Falling back to directory walk.")
+            print(f"Warning: Failed to parse sitemap at {target_sitemap}: {e}. Falling back to directory walk.")
     
     found_files = []
     

@@ -44,6 +44,62 @@ def generate_webmix(context):
     base_dir = context['base_dir']
     context['output'] = aggregate_website(base_dir)
 
+@given(parsers.parse('the site contains "{filename}"'))
+def ensure_file_exists(context, filename):
+    base_dir = context['base_dir']
+    file_path = os.path.join(base_dir, filename)
+    
+    if not os.path.exists(file_path):
+        # Create default content if not exists
+        content = "default content"
+        if "sitemap" in filename and filename.endswith(".xml"):
+            if "custom" in filename:
+                # Custom order: Contact then About
+                content = """
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                   <url><loc>http://example.com/contact</loc></url>
+                   <url><loc>http://example.com/about</loc></url>
+                </urlset>
+                """
+            else:
+                # Standard order
+                content = """
+                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                   <url><loc>http://example.com/</loc></url>
+                   <url><loc>http://example.com/about</loc></url>
+                   <url><loc>http://example.com/contact</loc></url>
+                </urlset>
+                """
+        
+        with open(file_path, 'w') as f:
+            f.write(content)
+
+@when(parsers.parse('I generate the webmix with argument "{args}"'))
+def generate_webmix_with_args(context, args):
+    base_dir = context['base_dir']
+    import shlex
+    arg_list = shlex.split(args)
+    
+    sitemap_arg = None
+    if "--sitemap" in arg_list:
+        idx = arg_list.index("--sitemap")
+        if idx + 1 < len(arg_list):
+            sitemap_arg = arg_list[idx+1]
+            
+    context['output'] = aggregate_website(base_dir, sitemap_path=sitemap_arg)
+
+@then(parsers.parse('the structure should be generated from "{filename}"'))
+def check_structure_source(context, filename):
+    output = context['output']
+    if "custom" in filename:
+        # Check for Contact before About (as defined in ensure_file_exists for custom sitemap)
+        contact_idx = output.find("Contact")
+        about_idx = output.find("About")
+        
+        assert contact_idx != -1, "Contact page not found in output"
+        assert about_idx != -1, "About page not found in output"
+        assert contact_idx < about_idx, "Expected Contact before About as per custom sitemap"
+
 @then("the Table of Contents should follow the order:")
 def check_toc_order(context, datatable):
     output = context['output']
