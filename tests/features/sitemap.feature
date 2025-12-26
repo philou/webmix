@@ -27,10 +27,25 @@ Feature: Sitemap Support
 
     Scenario: Override with CLI argument
       Given a local mirror of "simple-site"
-      And the site contains "sitemap.xml"
-      And the site contains "custom-sitemap.xml"
+      And the site contains a "sitemap.xml" with:
+        """
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+           <url><loc>http://example.com/</loc></url>
+           <url><loc>http://example.com/about</loc></url>
+           <url><loc>http://example.com/contact</loc></url>
+        </urlset>
+        """
+      And the site contains a "custom-sitemap.xml" with:
+        """
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+           <url><loc>http://example.com/contact</loc></url>
+           <url><loc>http://example.com/about</loc></url>
+        </urlset>
+        """
       When I generate the webmix with argument "--sitemap custom-sitemap.xml"
-      Then the structure should be generated from "custom-sitemap.xml"
+      Then the Table of Contents should follow the order:
+        | /contact |
+        | /about |
 
   Rule: If no sitemap is available, then the system shall fallback to directory structure.
 

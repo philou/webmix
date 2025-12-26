@@ -98,12 +98,10 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
 - [x] Feat: sitemap option. It should be possible to override the sitemap (or the absence of sitemap) by passing in an optional local sitemap file through the command line.
 
 - [x] Feat: Create a small standalone app that builds a sitemap.xml from the the sample website treatcfsfm.org which has a sitemap.php.html file that is not xml. You'll need to do some form of scrapping or parsing, It uses html nesting depth and custom classes to represent the hierarchy of topics.
-
-
-### Parking
-- [ ] Improve sitemap.feature:
+- [x] Refactor Test: Improve `sitemap.feature`:
     - there is a hard coded translation of paths to titles in the step def
     - the second scenario, where we expect to use the overriden sitemap hides stuff in the step definition
+    - [x] Also improve the agent description so that it does not make this kind of error again
 - [ ] refactor the Discovery and ToC tests to use builders instead of a full website
     *   For Structural Logic (Discovery, Linking, Aggregation): Use Builders.
         *   *Why:* We care about the graph/links, not the messy HTML content.
@@ -111,5 +109,11 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     *   For Parsing Logic (Extraction): Use Hybrid (Fixtures + Assertions).
         *   *Why:* We need realistic, messy HTML (ads, scripts) to test `trafilatura`, but we also need readable tests.
         *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
+    - [ ] Also, improve agent files so that they can decide on the best strategies by itself
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
-- [ ] Feat: filter out remaining noise (there are some "|" remaining here and there)
+- [ ] Feat: make sure html table are well printed
+
+
+### Parking
+- [ ] Feat: add meta-data headers at the beginning of every file (source, title)
+- [ ] Feat: filter out remaining noise (there are some "|" remaining here and there, and also Next>> navigation)

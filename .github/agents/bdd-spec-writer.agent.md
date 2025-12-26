@@ -32,6 +32,7 @@ Follow **Example Mapping** to discover requirements:
 - **Keep loops fast**: Use tags (e.g., `@slow`, `@network`, `@wip`) per the instructions to manage execution.
 - **Glossary-First**: Use domain terms from `GLOSSARY.md` (e.g., "Discovery", "Extraction") in steps. If a term is missing, propose a placeholder and suggest adding it to the glossary.
 - **Safety First**: Always request confirmation before writing or overwriting a `.feature` file. Prefer additive changes unless asked to refactor.
+- **Explicit Data**: Pass inputs and expected outputs explicitly in the feature file (via Tables or DocStrings) to avoid hardcoding in step definitions.
 
 ## Context Gathering
 Before drafting:

@@ -20,6 +20,12 @@ def local_mirror(context, tmp_path, site_name):
         (site_dir / "about" / "index.html").write_text("<html><title>About</title><body>About</body></html>")
         (site_dir / "contact").mkdir()
         (site_dir / "contact" / "index.html").write_text("<html><title>Contact</title><body>Contact</body></html>")
+        
+        context['path_title_map'] = {
+            "/": "Home",
+            "/about": "About",
+            "/contact": "Contact"
+        }
     elif site_name == "no-sitemap-site":
         (site_dir / "index.html").write_text("<html><title>Home</title><body>Home</body></html>")
         (site_dir / "page1.html").write_text("<html><title>Page 1</title><body>Page 1</body></html>")
@@ -44,36 +50,6 @@ def generate_webmix(context):
     base_dir = context['base_dir']
     context['output'] = aggregate_website(base_dir)
 
-@given(parsers.parse('the site contains "{filename}"'))
-def ensure_file_exists(context, filename):
-    base_dir = context['base_dir']
-    file_path = os.path.join(base_dir, filename)
-    
-    if not os.path.exists(file_path):
-        # Create default content if not exists
-        content = "default content"
-        if "sitemap" in filename and filename.endswith(".xml"):
-            if "custom" in filename:
-                # Custom order: Contact then About
-                content = """
-                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-                   <url><loc>http://example.com/contact</loc></url>
-                   <url><loc>http://example.com/about</loc></url>
-                </urlset>
-                """
-            else:
-                # Standard order
-                content = """
-                <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-                   <url><loc>http://example.com/</loc></url>
-                   <url><loc>http://example.com/about</loc></url>
-                   <url><loc>http://example.com/contact</loc></url>
-                </urlset>
-                """
-        
-        with open(file_path, 'w') as f:
-            f.write(content)
-
 @when(parsers.parse('I generate the webmix with argument "{args}"'))
 def generate_webmix_with_args(context, args):
     base_dir = context['base_dir']
@@ -88,54 +64,22 @@ def generate_webmix_with_args(context, args):
             
     context['output'] = aggregate_website(base_dir, sitemap_path=sitemap_arg)
 
-@then(parsers.parse('the structure should be generated from "{filename}"'))
-def check_structure_source(context, filename):
-    output = context['output']
-    if "custom" in filename:
-        # Check for Contact before About (as defined in ensure_file_exists for custom sitemap)
-        contact_idx = output.find("Contact")
-        about_idx = output.find("About")
-        
-        assert contact_idx != -1, "Contact page not found in output"
-        assert about_idx != -1, "About page not found in output"
-        assert contact_idx < about_idx, "Expected Contact before About as per custom sitemap"
-
 @then("the Table of Contents should follow the order:")
 def check_toc_order(context, datatable):
     output = context['output']
     # datatable is a list of dicts or rows depending on pytest-bdd version/usage
     # Assuming it's a list of rows (lists)
     
-    # If datatable is not passed correctly, we might need to parse it manually or use a different approach.
-    # For now, let's assume we get a list of rows.
-    
     # Debug print
     print(f"Output: {output}")
     
     expected_paths = [row[0] for row in datatable]
+    path_map = context.get('path_title_map', {})
     
     current_index = 0
     for path in expected_paths:
-        # We expect the path or the title to appear.
-        # The sitemap has /about, which maps to About title.
-        # The output TOC usually contains titles.
-        # But the test says "follow the order: | /about |"
-        # So we should look for something that represents /about.
-        # In the generated markdown, it might be "About" or the link "about/index.html".
-        
-        # Let's try to find the path itself if it's preserved, or the title.
-        # Given the simple-site setup:
-        # / -> Home
-        # /about -> About
-        # /contact -> Contact
-        
-        search_term = path
-        if path == "/":
-            search_term = "Home"
-        elif path == "/about":
-            search_term = "About"
-        elif path == "/contact":
-            search_term = "Contact"
+        # Look up the title from the map, or use the path itself if not found
+        search_term = path_map.get(path, path)
             
         found_index = output.find(search_term, current_index)
         assert found_index != -1, f"Expected '{search_term}' (for path {path}) not found in output after index {current_index}"
