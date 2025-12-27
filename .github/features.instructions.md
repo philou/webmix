@@ -14,6 +14,7 @@ When writing or updating `.feature` files, you must follow these guidelines to e
 | :--- | :--- |
 | **EARS Rules** | **Ubiquitous** (The system shall...), **Event** (When...), **State** (While...), **Unwanted** (If...), **Optional** (Where...) |
 | **Tags** | `@slow` (skip by default), `@network` (skip by default), `@wip` (local only), `@batch` (shell script) |
+| **Data** | Use **Builders** (inline tables) instead of static files. |
 | **Structure** | Feature → Background (optional) → Rule → Scenario / Scenario Outline |
 | **Filenames** | `kebab-case.feature` (e.g., `link-rewriting.feature`) |
 | **Run Tests** | `pytest -m "not slow and not network"` (Fast default) |
@@ -36,6 +37,7 @@ Before finalizing a feature file, verify it against these checklists.
 *   [ ] **Single Action:** Is there exactly one `When` step?
 *   [ ] **Observable:** Does the `Then` step assert a visible outcome (output, state change)?
 *   [ ] **Deterministic:** Are inputs and outputs fixed (no timestamps/randomness)?
+*   [ ] **Self-Contained:** Does the scenario define its own data (e.g., inline tables) rather than relying on external files?
 *   [ ] **Domain Language:** Does it use terms from the **Glossary** (e.g., "Subscriber" vs "User")?
 
 ### Background Checklist
@@ -91,7 +93,40 @@ We use the `Rule` keyword to group scenarios. Each Rule **MUST** be written usin
     *   `Where <feature is present>, the <system> shall <response>`
     *   *Ex:* `Rule: Where the 'verbose' flag is set, the system shall output debug logs.`
 
-## 4. Scenarios & Outlines
+## 5. Test Data & Builders
+
+Avoid relying on static files in `tests/data` whenever possible. Instead, use **Builders** to define test data directly in the scenario. This makes the test self-contained and easier to understand.
+
+### The "Builder" Pattern
+Use steps that accept data tables to create temporary resources on the fly.
+
+**Good:**
+```gherkin
+Given a site with pages:
+  | path       | title |
+  | index.html | Home  |
+  | about.html | About |
+```
+
+**Bad:**
+```gherkin
+Given the website "mysite" downloaded in "tests/data/sample_site"
+```
+
+### High-Level Abstractions
+For complex setups, use high-level steps that abstract the implementation details.
+
+**Good:**
+```gherkin
+Given page "source.html" links to "target.html"
+```
+
+**Bad:**
+```gherkin
+Given the file "source.html" contains "<a href='target.html'>link</a>"
+```
+
+## 6. Scenarios & Outlines
 
 ### Scenarios (Example Mapping)
 Scenarios are **concrete examples** that illustrate the Rule.

@@ -104,13 +104,22 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Also improve the agent description so that it does not make this kind of error again
 - [x] Docs: update bdd-developer to "write code to maximize AI context"
 - [ ] refactor the Discovery and ToC tests to use builders instead of a full website
-    *   For Structural Logic (Discovery, Linking, Aggregation): Use Builders.
+    *   For Structural Logic (Discovery, Linking, Aggregation, Sitemaps): Use Builders.
         *   *Why:* We care about the graph/links, not the messy HTML content.
         *   *How:* `Given a site with pages: | url | title | content |` (Generates simple HTML on the fly).
-    *   For Parsing Logic (Extraction): Use Hybrid (Fixtures + Assertions).
+    *   For Parsing Logic (Extraction): Use Hybrid (Fixtures + Assertions about the fixture data).
         *   *Why:* We need realistic, messy HTML (ads, scripts) to test `trafilatura`, but we also need readable tests.
         *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
-    - [ ] Also, improve agent files so that they can decide on the best strategies by itself
+    - [x] Ask AI to do a review of all features and find ideas for improvement
+    - [x] Upgrade agent and instructions to spot the following
+    - [ ] stop using different "when" (structure, discover, webmix, gen...) use the same one everywhere
+    - [ ] merge structure and discovery (they are the same) in table of content
+    - [ ] Rewrite Table of Content (Discovery + Structure) to look a bit like sitemap
+    - [ ] Refactor existing builders to use in-memory file system
+    - [ ] Rewrite Table of Content to use builders
+    - [ ] Rewrite linking to use builders
+    - [ ] Rewrite Aggregation to use builders
+    - [ ] Rewrite Sitemap to use builders
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: make sure html table are well printed
 

@@ -35,6 +35,7 @@ Follow **Example Mapping** to discover requirements:
 - **Glossary-First**: Use domain terms from `GLOSSARY.md` (e.g., "Discovery", "Extraction") in steps. If a term is missing, propose a placeholder and suggest adding it to the glossary.
 - **Safety First**: Always request confirmation before writing or overwriting a `.feature` file. Prefer additive changes unless asked to refactor.
 - **Explicit Data**: Pass inputs and expected outputs explicitly in the feature file (via Tables or DocStrings) to avoid hardcoding in step definitions.
+- **Builder Pattern**: Prefer creating test data inline (e.g., `Given a site with pages:`) over relying on static files in `tests/data`. This makes tests self-contained and readable.
 
 ## Context Gathering
 Before drafting:
@@ -89,7 +90,9 @@ Feature: <Short, Active Title>
   Rule: <EARS statement>
 
     Scenario: <Concrete example>
-      Given ...
+      Given a site with pages:
+        | path | content | title |
+        | index.html | ... | Home |
       When ...
       Then ...
 

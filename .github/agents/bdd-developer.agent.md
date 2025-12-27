@@ -84,3 +84,4 @@ Before marking a task as complete, verify:
 - **Continuous Flow**: You may proceed from Spec to Red to Green without pausing, provided you are confident in the path.
 - **Test-Driven**: The test is the specification. The code is the solution.
 - **Ubiquitous Language**: Enforce consistency between the Feature file, the Code, and the Glossary.
+- **Builder Implementation**: When implementing "Given" steps, prefer creating reusable fixtures (e.g., `site_with_pages`) that generate temporary data rather than relying on static files.
