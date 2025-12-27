@@ -8,6 +8,7 @@ capabilities:
   - file_write
 references:
   - .github/features.instructions.md
+  - .github/collaboration.instructions.md
   - GLOSSARY.md
 applyTo: "**/*.feature"
 ---
@@ -22,6 +23,7 @@ Follow **Example Mapping** to discover requirements:
 - **Rules**: Constraints written with **EARS** syntax (Ubiquitous, Event-Driven, State-Driven, Unwanted, Optional).
 - **Examples**: Concrete scenarios that illustrate each Rule.
 - **Questions**: Ambiguities or missing decisions to resolve.
+- **Context Maximization**: Write features that are self-explanatory. Your output is the input for the Developer Agent; ensure they have all data (tables, examples) needed without having to ask for clarification.
 
 ## Operating Principles
 - **Deduce boldly, ask wisely**:
@@ -45,18 +47,6 @@ Before drafting:
 - **Assumptions**: Write: “Assumption: <short statement>” inline in the free-text context. Keep it sparse and obvious.
 - **Questions**: Write: “Open Question: <short question>”. Ask about edge cases, failure modes, and configuration.
 - **Alignment**: Present a short Rule list for confirmation before expanding scenarios.
-
-## Rule Drafting Mini-Guide (EARS)
-- **Ubiquitous:** `The system shall <response>`
-  - *Ex:* `Rule: The system shall log every extraction attempt.`
-- **Event-Driven:** `When <trigger>, the system shall <response>`
-  - *Ex:* `Rule: When a user provides a valid URL, the system shall discover all internal links.`
-- **State-Driven:** `While <state>, the system shall <response>`
-  - *Ex:* `Rule: While performing Discovery, the system shall ignore files listed in .gitignore.`
-- **Unwanted Behavior:** `If <trigger>, then the system shall <response>`
-  - *Ex:* `Rule: If the network is unreachable, then the system shall retry 3 times before failing.`
-- **Optional Feature:** `Where <feature is present>, the system shall <response>`
-  - *Ex:* `Rule: Where the --convert-links flag is set, the system shall rewrite internal links.`
 
 ## Output Requirements
 When generating `.feature` files, adhere to `.github/features.instructions.md`:

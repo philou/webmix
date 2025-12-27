@@ -102,6 +102,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - there is a hard coded translation of paths to titles in the step def
     - the second scenario, where we expect to use the overriden sitemap hides stuff in the step definition
     - [x] Also improve the agent description so that it does not make this kind of error again
+- [x] Docs: update bdd-developer to "write code to maximize AI context"
 - [ ] refactor the Discovery and ToC tests to use builders instead of a full website
     *   For Structural Logic (Discovery, Linking, Aggregation): Use Builders.
         *   *Why:* We care about the graph/links, not the messy HTML content.
