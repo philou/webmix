@@ -10,7 +10,7 @@ Feature: Website Discovery
       Given the website "treatcfsfm.org" downloaded in local directory "tests/data/sample_site"
       And the website contains at least 10 files
       And the website contains an "treatcfsfm.org/index.html" file
-      When I discover the files
+      When I aggregate the website content
       Then I should find at least 10 files
       And the file "treatcfsfm.org/index.html" should be in the list
 
@@ -21,7 +21,7 @@ Feature: Website Discovery
       And the website contains an "treatcfsfm.org/index.html" file
       And the website contains an "treatcfsfm.org/detail-80-Getting-Through-the-Bad-Days.html" file
       And the website contains an "treatcfsfm.org/detail-104-Learning-to-Manage-Fibromyalgia.html" file
-      When I generate the site structure
+      When I aggregate the website content
       Then the output should contain "Directory Structure"
       And the output should contain "treatcfsfm.org/"
       And the output should contain "index.html"

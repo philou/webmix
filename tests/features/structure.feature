@@ -4,7 +4,7 @@ Feature: Site Structure Generation
 
     Scenario: Generate hierarchical TOC
       Given a local directory "tests/data/hierarchical_site"
-      When I generate the site structure
+      When I aggregate the website content
       Then the output should match the structure:
         """
         - index.html

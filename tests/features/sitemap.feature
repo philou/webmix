@@ -17,7 +17,7 @@ Feature: Sitemap Support
            <url><loc>http://example.com/contact</loc></url>
         </urlset>
         """
-      When I generate the webmix
+      When I aggregate the website content
       Then the Table of Contents should follow the order:
         | / |
         | /about |
@@ -42,7 +42,7 @@ Feature: Sitemap Support
            <url><loc>http://example.com/about</loc></url>
         </urlset>
         """
-      When I generate the webmix with argument "--sitemap custom-sitemap.xml"
+      When I aggregate the website content with argument "--sitemap custom-sitemap.xml"
       Then the Table of Contents should follow the order:
         | /contact |
         | /about |
@@ -52,5 +52,5 @@ Feature: Sitemap Support
     Scenario: Fallback to directory walking
       Given a local mirror of "no-sitemap-site"
       And the site does not contain "sitemap.xml"
-      When I generate the webmix
+      When I aggregate the website content
       Then the Table of Contents should reflect the directory structure

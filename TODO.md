@@ -112,7 +112,12 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         *   *How:* `Given the fixture "article_with_ads.html"` AND `And the page contains a sidebar with "Subscribe Now"` (Loads real file but asserts its content in the step to prevent drift).
     - [x] Ask AI to do a review of all features and find ideas for improvement
     - [x] Upgrade agent and instructions to spot the following
-    - [ ] stop using different "when" (structure, discover, webmix, gen...) use the same one everywhere
+    - [ ] . test(features): refactor: Replace all different "Whens" with "When I aggregate the website content" in:
+        - [x] aggregation.feature: When I aggregate the website content
+        - [x] discovery.feature: When I discover the files
+        - [x] sitemap.feature: When I generate the webmix
+        - [x] structure.feature: When I generate the site structure
+        - [ ] put the "When I aggregate the website content" step definition implementation in common for all features!
     - [ ] merge structure and discovery (they are the same) in table of content
     - [ ] Rewrite Table of Content (Discovery + Structure) to look a bit like sitemap
     - [ ] Refactor existing builders to use in-memory file system

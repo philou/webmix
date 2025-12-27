@@ -11,7 +11,7 @@ scenarios('../features/structure.feature')
 def local_directory(context, path):
     context['base_dir'] = os.path.abspath(path)
 
-@when('I generate the site structure')
+@when('I aggregate the website content')
 def generate_structure(context):
     base_dir = context['base_dir']
     files = discover_files(base_dir)

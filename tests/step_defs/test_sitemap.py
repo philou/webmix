@@ -45,12 +45,12 @@ def ensure_file_not_exists(context, filename):
     if os.path.exists(file_path):
         os.remove(file_path)
 
-@when('I generate the webmix')
+@when('I aggregate the website content')
 def generate_webmix(context):
     base_dir = context['base_dir']
     context['output'] = aggregate_website(base_dir)
 
-@when(parsers.parse('I generate the webmix with argument "{args}"'))
+@when(parsers.parse('I aggregate the website content with argument "{args}"'))
 def generate_webmix_with_args(context, args):
     base_dir = context['base_dir']
     import shlex

@@ -24,17 +24,11 @@ def website_contains_files(context, count):
     if found < count:
         raise AssertionError(f"Input directory has fewer files than expected: found {found}, expected >= {count}")
 
-@when('I discover the files')
+@when('I aggregate the website content')
 def discover(context):
     base_dir = context['base_dir']
     context['files'] = discover_files(base_dir)
-
-@when('I generate the site structure')
-def generate_structure(context):
-    # Ensure files are discovered first
-    if 'files' not in context:
-        discover(context)
-    
+    # Also generate output for the second scenario
     context['output'] = generate_webmix_output(context['files'])
 
 @then(parsers.parse('I should find at least {count:d} files'))
