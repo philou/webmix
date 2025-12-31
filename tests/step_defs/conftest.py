@@ -63,10 +63,39 @@ def site_with_pages(context, tmp_path, datatable):
         if not content:
             # If 'content' column is missing or empty, check for 'body'
             body = data.get('body')
+            
+            # Check for title and link columns
+            title = data.get('title')
+            link_spec = data.get('link')
+            
             if body:
                 content = f"<html><body>{body}</body></html>"
             else:
-                content = "<html><body>Default Content</body></html>"
+                # Generate dummy content
+                html_parts = ["<html><head>"]
+                if title:
+                    html_parts.append(f"<title>{title}</title>")
+                html_parts.append("</head><body>")
+                
+                if title:
+                    html_parts.append(f"<h1>{title}</h1>")
+                
+                # Add enough content for trafilatura to recognize it
+                html_parts.append("<p>This is some dummy content that is long enough to be considered as main content by the extraction engine. " * 5 + "</p>")
+                
+                if link_spec:
+                    # Parse link spec: "[link text](target.html)" or just "target.html"
+                    import re
+                    match = re.match(r'\[([^\]]+)\]\(([^)]+)\)', link_spec)
+                    if match:
+                        text, href = match.groups()
+                    else:
+                        href = link_spec
+                        text = "link"
+                    html_parts.append(f'<p>Here is a <a href="{href}">{text}</a>.</p>')
+                
+                html_parts.append("</body></html>")
+                content = "".join(html_parts)
         
         if path:
             file_path = site_dir / path
