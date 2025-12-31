@@ -118,17 +118,23 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - [x] sitemap.feature: When I generate the webmix
         - [x] structure.feature: When I generate the site structure
         - [x] put the "When I aggregate the website content" step definition implementation in common for all features!
-    - [ ] Rewrite Table of Content (Discovery + Structure) to look a bit like sitemap
-    - [ ] Refactor existing builders to use in-memory file system
+    - [x] Refactor existing builders to use in-memory file system
+        *   *Note:* We used `tmp_path` (pytest fixture) instead of pure in-memory mocking (like `pyfakefs`).
+        *   *Reason 1:* `trafilatura` and `lxml` rely on real file paths and C-extensions, making deep mocking brittle.
+        *   *Reason 2:* Avoids "mocking the implementation" and keeps production code simple (no need for FS abstraction).
+        *   *Reason 3:* Modern OSes usually mount /tmp as tmpfs RAM
     - [ ] Rewrite Table of Content to use builders
     - [ ] Rewrite linking to use builders
     - [ ] Rewrite Aggregation to use builders
     - [ ] Rewrite Sitemap to use builders
+    - [ ] Merge discovery scenarios into table_of_content
+        - [ ] Use same style (data, assertions...)
+        - [ ] Remove duplicated tests
+    - [ ] Reuse table_of_content assertion in sitemap
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: make sure html table are well printed
 
 
 ### Parking
-- [ ] merge structure and discovery (they are the same) in table of content
 - [ ] Feat: add meta-data headers at the beginning of every file (source, title)
 - [ ] Feat: filter out remaining noise (there are some "|" remaining here and there, and also Next>> navigation)
