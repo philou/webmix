@@ -45,9 +45,11 @@ Feature: Sitemap Support
         </urlset>
         """
       When I aggregate the website content with argument "--sitemap custom-sitemap.xml"
-      Then the Table of Contents should follow the order:
-        | Contact |
-        | About |
+      Then the output should match the table of content:
+        """
+        ## contact/index.html
+        ## about/index.html
+        """
 
   Rule: If no sitemap is available, then the system shall fallback to directory structure.
 

@@ -103,7 +103,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - the second scenario, where we expect to use the overriden sitemap hides stuff in the step definition
     - [x] Also improve the agent description so that it does not make this kind of error again
 - [x] Docs: update bdd-developer to "write code to maximize AI context"
-- [ ] refactor the Discovery and ToC tests to use builders instead of a full website
+- [x] refactor the Discovery and ToC tests to use builders instead of a full website
     *   For Structural Logic (Discovery, Linking, Aggregation, Sitemaps): Use Builders.
         *   *Why:* We care about the graph/links, not the messy HTML content.
         *   *How:* `Given a site with pages: | url | title | content |` (Generates simple HTML on the fly).
@@ -142,7 +142,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - [x] Delete discovery.feature
         - [x] Use same style (data, assertions...)
         - [x] Remove duplicated tests
-    - [ ] Reuse table_of_content assertion in sitemap
+    - [x] Reuse table_of_content assertion in sitemap
 - [ ] Add a scenario explanation free text for each scenario (ex in sitemap: "this site has a sitemap that does not contain contact page, and it is not in the ToC")
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: make sure html table are well printed

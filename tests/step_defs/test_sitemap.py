@@ -19,20 +19,4 @@ def generate_webmix_with_args(context, args):
             
     context['output'] = aggregate_website(base_dir, sitemap_path=sitemap_arg)
 
-@then("the Table of Contents should follow the order:")
-def check_toc_order(context, datatable):
-    output = context['output']
-    # datatable is a list of dicts or rows depending on pytest-bdd version/usage
-    # Assuming it's a list of rows (lists)
-    
-    # Debug print
-    print(f"Output: {output}")
-    
-    expected_items = [row[0] for row in datatable]
-    
-    current_index = 0
-    for item in expected_items:
-        found_index = output.find(item, current_index)
-        assert found_index != -1, f"Expected '{item}' not found in output after index {current_index}"
-        current_index = found_index
 
