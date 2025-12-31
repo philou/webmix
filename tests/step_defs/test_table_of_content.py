@@ -3,13 +3,13 @@ import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
 import os
 
-scenarios('../features/structure.feature')
+scenarios('../features/table_of_content.feature')
 
 @given(parsers.parse('a local directory "{path}"'))
 def local_directory(context, path):
     context['base_dir'] = os.path.abspath(path)
 
-@then("the output should match the structure:")
+@then("the output should match the table of content:")
 def check_output_multiline(context, docstring):
     text = docstring
     assert context.get('output') is not None
