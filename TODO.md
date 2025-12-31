@@ -134,11 +134,13 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
             - website builder step
             - this new (Given)"a standard sitemap step"
             - adapt of the existing (Given)"the site contains a "custom-sitemap.xml" with:"
-    - [ ] Rewrite linking.feature to use website test data builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed.
+    - [x] Rewrite linking.feature to use website test data builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed.
+    - [ ] Refactor linking.feature for website builder to accept 2 extra optional columns: title and link. Generate long enough dummy content for all pages and append "link" to the end of the dummy content when specified
     - [ ] Merge discovery scenarios into table_of_content
         - [ ] Use same style (data, assertions...)
         - [ ] Remove duplicated tests
     - [ ] Reuse table_of_content assertion in sitemap
+- [ ] Add a scenario explanation free text for each scenario (ex in sitemap: "this site has a sitemap that does not contain contact page, and it is not in the ToC")
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: make sure html table are well printed
 
