@@ -29,6 +29,42 @@ def check_output_contains(context, text):
     assert context.get('output') is not None
     assert text in context['output']
 
+@given(parsers.parse('the site contains a "{filename}" with:'))
+def create_file_with_content(context, filename, docstring):
+    base_dir = context['base_dir']
+    file_path = os.path.join(base_dir, filename)
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+    with open(file_path, 'w') as f:
+        f.write(docstring)
+
+@given(parsers.parse('the site does not contain "{filename}"'))
+def ensure_file_not_exists(context, filename):
+    base_dir = context['base_dir']
+    file_path = os.path.join(base_dir, filename)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+
+@given("a site with pages:")
+def site_with_pages(context, tmp_path, datatable):
+    site_dir = tmp_path / "site"
+    if not site_dir.exists():
+        site_dir.mkdir()
+    context['base_dir'] = str(site_dir)
+    
+    # datatable is a list of rows, where the first row is the header
+    headers = datatable[0]
+    rows = datatable[1:]
+    
+    for row in rows:
+        data = dict(zip(headers, row))
+        path = data.get('path') or data.get('url')
+        content = data.get('content') or "<html><body>Default Content</body></html>"
+        
+        if path:
+            file_path = site_dir / path
+            file_path.parent.mkdir(parents=True, exist_ok=True)
+            file_path.write_text(content)
+
 @when('I aggregate the website content')
 def aggregate_content(context):
     base_dir = context['base_dir']

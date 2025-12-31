@@ -9,7 +9,12 @@ Feature: Table of Content Generation
   Rule: The system shall generate a hierarchical Table of Contents reflecting the directory structure.
 
     Scenario: Generate hierarchical TOC
-      Given a local directory "tests/data/hierarchical_site"
+      Given a site with pages:
+        | path | content |
+        | index.html | <html><body>Home</body></html> |
+        | section-a/index.html | <html><body>Section A</body></html> |
+        | section-a/page1.html | <html><body>Page 1</body></html> |
+        | section-b/index.html | <html><body>Section B</body></html> |
       When I aggregate the website content
       Then the output should match the table of content:
         """

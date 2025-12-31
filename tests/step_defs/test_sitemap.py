@@ -30,21 +30,6 @@ def local_mirror(context, tmp_path, site_name):
         (site_dir / "index.html").write_text("<html><title>Home</title><body>Home</body></html>")
         (site_dir / "page1.html").write_text("<html><title>Page 1</title><body>Page 1</body></html>")
 
-@given(parsers.parse('the site contains a "{filename}" with:'))
-def create_file_with_content(context, filename, docstring):
-    base_dir = context['base_dir']
-    file_path = os.path.join(base_dir, filename)
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with open(file_path, 'w') as f:
-        f.write(docstring)
-
-@given(parsers.parse('the site does not contain "{filename}"'))
-def ensure_file_not_exists(context, filename):
-    base_dir = context['base_dir']
-    file_path = os.path.join(base_dir, filename)
-    if os.path.exists(file_path):
-        os.remove(file_path)
-
 @when(parsers.parse('I aggregate the website content with argument "{args}"'))
 def generate_webmix_with_args(context, args):
     base_dir = context['base_dir']

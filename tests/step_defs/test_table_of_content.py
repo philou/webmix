@@ -5,10 +5,6 @@ import os
 
 scenarios('../features/table_of_content.feature')
 
-@given(parsers.parse('a local directory "{path}"'))
-def local_directory(context, path):
-    context['base_dir'] = os.path.abspath(path)
-
 @then("the output should match the table of content:")
 def check_output_multiline(context, docstring):
     text = docstring

@@ -123,7 +123,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         *   *Reason 1:* `trafilatura` and `lxml` rely on real file paths and C-extensions, making deep mocking brittle.
         *   *Reason 2:* Avoids "mocking the implementation" and keeps production code simple (no need for FS abstraction).
         *   *Reason 3:* Modern OSes usually mount /tmp as tmpfs RAM
-    - [ ] Rewrite Table of Content to use builders
+    - [x] Rewrite Table of Content to use builders
     - [ ] Rewrite linking to use builders
     - [ ] Rewrite Aggregation to use builders
     - [ ] Rewrite Sitemap to use builders
