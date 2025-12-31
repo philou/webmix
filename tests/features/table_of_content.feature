@@ -6,6 +6,19 @@ Feature: Table of Content Generation
   - Value: Provides a clear overview of the site's organization, helping both users and LLMs understand the relationship between pages.
   - Actors: User (CLI), LLM (Consumer).
 
+  Rule: The system shall discover all HTML files and provide a summary.
+
+    Scenario: Discover pages and generate summary
+      Given a site with pages:
+        | path |
+        | index.html |
+        | page1.html |
+        | sub/page2.html |
+      When I aggregate the website content
+      Then I should find at least 3 files
+      And the output should contain "File Summary"
+      And the output should contain "Directory Structure"
+
   Rule: The system shall generate a hierarchical Table of Contents reflecting the directory structure.
 
     Scenario: Generate hierarchical TOC

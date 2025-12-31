@@ -1,11 +1,20 @@
 import pytest
 from pytest_bdd import given, when, then, parsers
 import os
+import re
 from webmix.main import aggregate_website
 
 @pytest.fixture
 def context():
     return {}
+
+@then(parsers.parse('I should find at least {count:d} files'))
+def check_file_count(context, count):
+    output = context['output']
+    match = re.search(r"This file contains the content of (\d+) pages", output)
+    assert match, "Could not find file count in output summary"
+    found_count = int(match.group(1))
+    assert found_count >= count
 
 @given(parsers.parse('the website "{website_name}" downloaded in local directory "{path}"'))
 def website_downloaded(context, website_name, path):
