@@ -117,7 +117,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - [x] discovery.feature: When I discover the files
         - [x] sitemap.feature: When I generate the webmix
         - [x] structure.feature: When I generate the site structure
-        - [ ] put the "When I aggregate the website content" step definition implementation in common for all features!
+        - [x] put the "When I aggregate the website content" step definition implementation in common for all features!
     - [ ] merge structure and discovery (they are the same) in table of content
     - [ ] Rewrite Table of Content (Discovery + Structure) to look a bit like sitemap
     - [ ] Refactor existing builders to use in-memory file system

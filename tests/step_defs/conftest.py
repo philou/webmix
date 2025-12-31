@@ -1,6 +1,7 @@
 import pytest
-from pytest_bdd import given, then, parsers
+from pytest_bdd import given, when, then, parsers
 import os
+from webmix.main import aggregate_website
 
 @pytest.fixture
 def context():
@@ -27,3 +28,9 @@ def file_contains_content(context, filename, content):
 def check_output_contains(context, text):
     assert context.get('output') is not None
     assert text in context['output']
+
+@when('I aggregate the website content')
+def aggregate_content(context):
+    base_dir = context['base_dir']
+    context['output'] = aggregate_website(base_dir)
+

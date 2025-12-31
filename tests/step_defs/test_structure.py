@@ -1,8 +1,6 @@
 
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
-from webmix.discovery import discover_files
-from webmix.structure import generate_directory_structure
 import os
 
 scenarios('../features/structure.feature')
@@ -10,12 +8,6 @@ scenarios('../features/structure.feature')
 @given(parsers.parse('a local directory "{path}"'))
 def local_directory(context, path):
     context['base_dir'] = os.path.abspath(path)
-
-@when('I aggregate the website content')
-def generate_structure(context):
-    base_dir = context['base_dir']
-    files = discover_files(base_dir)
-    context['output'] = generate_directory_structure(files)
 
 @then("the output should match the structure:")
 def check_output_multiline(context, docstring):

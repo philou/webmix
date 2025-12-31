@@ -1,8 +1,7 @@
 import pytest
 from pytest_bdd import scenarios, given, when, then, parsers
-from webmix.discovery import discover_files
-from webmix.structure import generate_webmix_output
 import os
+import re
 
 # Load scenarios
 scenarios('../features/discovery.feature')
@@ -24,18 +23,17 @@ def website_contains_files(context, count):
     if found < count:
         raise AssertionError(f"Input directory has fewer files than expected: found {found}, expected >= {count}")
 
-@when('I aggregate the website content')
-def discover(context):
-    base_dir = context['base_dir']
-    context['files'] = discover_files(base_dir)
-    # Also generate output for the second scenario
-    context['output'] = generate_webmix_output(context['files'])
-
 @then(parsers.parse('I should find at least {count:d} files'))
 def check_file_count(context, count):
-    assert len(context['files']) >= count
+    output = context['output']
+    match = re.search(r"This file contains the content of (\d+) pages", output)
+    assert match, "Could not find file count in output summary"
+    found_count = int(match.group(1))
+    assert found_count >= count
 
 @then(parsers.parse('the file "{path}" should be in the list'))
 def check_file_exists(context, path):
-    assert path in context['files']
+    # The path should appear in the directory structure or file headers
+    assert path in context['output']
+
 
