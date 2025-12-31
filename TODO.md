@@ -128,8 +128,13 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
     - [x] Rewrite Aggregation to use builders
     - [x] Improve website builders to accept an optional Content column, and generate the rest of the html from this. Use this in Aggregation.feature
     - [x] Rewrite Discovery.feature to use website test data builder builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed.
+    - [x] Rewrite Sitemap.feature to use website test data builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed. 
+        - [x] Create a new step-definition (Given)"a standard sitemap" that walks the dir in `context['base_dir']` to find the files and generate a standard sitemap.xml.
+        - [x] Rewrite the Sitemap.feature to use:
+            - website builder step
+            - this new (Given)"a standard sitemap step"
+            - adapt of the existing (Given)"the site contains a "custom-sitemap.xml" with:"
     - [ ] Rewrite linking.feature to use website test data builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed.
-    - [ ] Rewrite Sitemap.feature to use website test data builders. This is test only refactoring, don't modify the production code, enhace the website builder if needed.
     - [ ] Merge discovery scenarios into table_of_content
         - [ ] Use same style (data, assertions...)
         - [ ] Remove duplicated tests

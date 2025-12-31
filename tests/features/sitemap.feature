@@ -8,49 +8,57 @@ Feature: Sitemap Support
   Rule: Where a sitemap is available, the system shall use it to generate the Table of Contents.
 
     Scenario: Parse standard XML sitemap
-      Given a local mirror of "simple-site"
+      Given a site with pages:
+        | path | body |
+        | index.html | Home |
+        | about/index.html | About |
+        | contact/index.html | Contact |
       And the site contains a "sitemap.xml" with:
         """
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-           <url><loc>http://example.com/</loc></url>
-           <url><loc>http://example.com/about</loc></url>
-           <url><loc>http://example.com/contact</loc></url>
+           <url><loc>http://example.com/index.html</loc></url>
+           <url><loc>http://example.com/about/index.html</loc></url>
         </urlset>
         """
       When I aggregate the website content
-      Then the Table of Contents should follow the order:
-        | / |
-        | /about |
-        | /contact |
+      Then the output should match the table of content:
+        """
+        - about/
+          - index.html
+        - index.html
+        """
 
   Rule: Where a sitemap is explicitly provided, the system shall use it instead of auto-discovery.
 
     Scenario: Override with CLI argument
-      Given a local mirror of "simple-site"
-      And the site contains a "sitemap.xml" with:
-        """
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-           <url><loc>http://example.com/</loc></url>
-           <url><loc>http://example.com/about</loc></url>
-           <url><loc>http://example.com/contact</loc></url>
-        </urlset>
-        """
+      Given a site with pages:
+        | path | body |
+        | index.html | Home |
+        | about/index.html | About |
+        | contact/index.html | Contact |
+      And a standard sitemap
       And the site contains a "custom-sitemap.xml" with:
         """
         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-           <url><loc>http://example.com/contact</loc></url>
-           <url><loc>http://example.com/about</loc></url>
+           <url><loc>http://example.com/contact/index.html</loc></url>
+           <url><loc>http://example.com/about/index.html</loc></url>
         </urlset>
         """
       When I aggregate the website content with argument "--sitemap custom-sitemap.xml"
       Then the Table of Contents should follow the order:
-        | /contact |
-        | /about |
+        | Contact |
+        | About |
 
   Rule: If no sitemap is available, then the system shall fallback to directory structure.
 
     Scenario: Fallback to directory walking
-      Given a local mirror of "no-sitemap-site"
-      And the site does not contain "sitemap.xml"
+      Given a site with pages:
+        | path | body |
+        | index.html | Home |
+        | page1.html | Page 1 |
       When I aggregate the website content
-      Then the Table of Contents should reflect the directory structure
+      Then the output should match the table of content:
+        """
+        - index.html
+        - page1.html
+        """

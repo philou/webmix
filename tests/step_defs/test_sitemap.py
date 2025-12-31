@@ -5,31 +5,6 @@ from webmix.main import aggregate_website
 
 scenarios('../features/sitemap.feature')
 
-@given(parsers.parse('a local mirror of "{site_name}"'))
-def local_mirror(context, tmp_path, site_name):
-    site_dir = tmp_path / site_name
-    if not site_dir.exists():
-        site_dir.mkdir()
-    context['base_dir'] = str(site_dir)
-    context['site_name'] = site_name
-    
-    if site_name == "simple-site":
-        # Create files corresponding to the sitemap
-        (site_dir / "index.html").write_text("<html><title>Home</title><body>Home</body></html>")
-        (site_dir / "about").mkdir()
-        (site_dir / "about" / "index.html").write_text("<html><title>About</title><body>About</body></html>")
-        (site_dir / "contact").mkdir()
-        (site_dir / "contact" / "index.html").write_text("<html><title>Contact</title><body>Contact</body></html>")
-        
-        context['path_title_map'] = {
-            "/": "Home",
-            "/about": "About",
-            "/contact": "Contact"
-        }
-    elif site_name == "no-sitemap-site":
-        (site_dir / "index.html").write_text("<html><title>Home</title><body>Home</body></html>")
-        (site_dir / "page1.html").write_text("<html><title>Page 1</title><body>Page 1</body></html>")
-
 @when(parsers.parse('I aggregate the website content with argument "{args}"'))
 def generate_webmix_with_args(context, args):
     base_dir = context['base_dir']
@@ -53,20 +28,11 @@ def check_toc_order(context, datatable):
     # Debug print
     print(f"Output: {output}")
     
-    expected_paths = [row[0] for row in datatable]
-    path_map = context.get('path_title_map', {})
+    expected_items = [row[0] for row in datatable]
     
     current_index = 0
-    for path in expected_paths:
-        # Look up the title from the map, or use the path itself if not found
-        search_term = path_map.get(path, path)
-            
-        found_index = output.find(search_term, current_index)
-        assert found_index != -1, f"Expected '{search_term}' (for path {path}) not found in output after index {current_index}"
+    for item in expected_items:
+        found_index = output.find(item, current_index)
+        assert found_index != -1, f"Expected '{item}' not found in output after index {current_index}"
         current_index = found_index
 
-@then("the Table of Contents should reflect the directory structure")
-def check_toc_directory_structure(context):
-    output = context['output']
-    assert "Home" in output
-    assert "Page 1" in output
