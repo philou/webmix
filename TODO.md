@@ -124,9 +124,11 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         *   *Reason 2:* Avoids "mocking the implementation" and keeps production code simple (no need for FS abstraction).
         *   *Reason 3:* Modern OSes usually mount /tmp as tmpfs RAM
     - [x] Rewrite Table of Content to use builders
+    - [x] Improve website builders to only take in the test related information, but generate the rest. For ex, in table_of_content, we don't need the content of the files in the .feature file, we only care about the path. So Generate valid dummy html when not specified.
     - [ ] Rewrite linking to use builders
     - [ ] Rewrite Aggregation to use builders
     - [ ] Rewrite Sitemap to use builders
+    - [ ] Rewrite Discovery to use builders
     - [ ] Merge discovery scenarios into table_of_content
         - [ ] Use same style (data, assertions...)
         - [ ] Remove duplicated tests

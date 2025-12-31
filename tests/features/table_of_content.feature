@@ -10,11 +10,11 @@ Feature: Table of Content Generation
 
     Scenario: Generate hierarchical TOC
       Given a site with pages:
-        | path | content |
-        | index.html | <html><body>Home</body></html> |
-        | section-a/index.html | <html><body>Section A</body></html> |
-        | section-a/page1.html | <html><body>Page 1</body></html> |
-        | section-b/index.html | <html><body>Section B</body></html> |
+        | path |
+        | index.html |
+        | section-a/index.html |
+        | section-a/page1.html |
+        | section-b/index.html |
       When I aggregate the website content
       Then the output should match the table of content:
         """
