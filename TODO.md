@@ -125,8 +125,9 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         *   *Reason 3:* Modern OSes usually mount /tmp as tmpfs RAM
     - [x] Rewrite Table of Content to use builders
     - [x] Improve website builders to only take in the test related information, but generate the rest. For ex, in table_of_content, we don't need the content of the files in the .feature file, we only care about the path. So Generate valid dummy html when not specified.
+    - [x] Rewrite Aggregation to use builders
+    - [x] Improve website builders to accept an optional Content column, and generate the rest of the html from this. Use this in Aggregation.feature
     - [ ] Rewrite linking to use builders
-    - [ ] Rewrite Aggregation to use builders
     - [ ] Rewrite Sitemap to use builders
     - [ ] Rewrite Discovery to use builders
     - [ ] Merge discovery scenarios into table_of_content

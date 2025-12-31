@@ -58,7 +58,15 @@ def site_with_pages(context, tmp_path, datatable):
     for row in rows:
         data = dict(zip(headers, row))
         path = data.get('path') or data.get('url')
-        content = data.get('content') or "<html><body>Default Content</body></html>"
+        
+        content = data.get('content')
+        if not content:
+            # If 'content' column is missing or empty, check for 'body'
+            body = data.get('body')
+            if body:
+                content = f"<html><body>{body}</body></html>"
+            else:
+                content = "<html><body>Default Content</body></html>"
         
         if path:
             file_path = site_dir / path
