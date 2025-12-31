@@ -7,6 +7,9 @@ Feature: Link Rewriting
   Rule: The system shall rewrite internal links to point to the aggregated sections.
 
     Scenario: Rewrite internal links to show target page titles
+
+      Links to other pages in the site are rewritten to reference the target page's title, making them useful in a single-file context.
+
       Given a site with pages:
         | path | title | link |
         | source.html | Source Page | [recovery story](target.html) |

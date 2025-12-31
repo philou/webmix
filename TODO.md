@@ -143,7 +143,7 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - [x] Use same style (data, assertions...)
         - [x] Remove duplicated tests
     - [x] Reuse table_of_content assertion in sitemap
-- [ ] Add a scenario explanation free text for each scenario (ex in sitemap: "this site has a sitemap that does not contain contact page, and it is not in the ToC")
+- [x] Add a scenario explanation free text for each scenario (ex in sitemap: "this site has a sitemap that does not contain contact page, and it is not in the ToC")
 - [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
 - [ ] Feat: make sure html table are well printed
 

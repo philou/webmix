@@ -15,6 +15,9 @@ Feature: Content Extraction
   Rule: The system shall remove navigation and boilerplate elements.
 
     Scenario: Clean up margin links
+
+      Navigation menus and sidebars are stripped out to leave only the relevant article content.
+
       Given the website "treatcfsfm.org" downloaded in local directory "tests/data/sample_site"
       And the file "treatcfsfm.org/detail-100-How-I-Improved-My-Life-by-Accepting-My-Limits.html" contains "<li><a href="index.html" >Home</a></li>"
       When I extract the content from "treatcfsfm.org/detail-100-How-I-Improved-My-Life-by-Accepting-My-Limits.html"

@@ -8,6 +8,9 @@ Feature: Sitemap Support
   Rule: Where a sitemap is available, the system shall use it to generate the Table of Contents.
 
     Scenario: Parse standard XML sitemap
+
+      The site has a sitemap that does not contain the contact page, so it should not appear in the ToC.
+
       Given a site with pages:
         | path | body |
         | index.html | Home |
@@ -31,6 +34,9 @@ Feature: Sitemap Support
   Rule: Where a sitemap is explicitly provided, the system shall use it instead of auto-discovery.
 
     Scenario: Override with CLI argument
+
+      The user provides a custom sitemap that lists contact and about pages, but not the home page.
+
       Given a site with pages:
         | path | body |
         | index.html | Home |
