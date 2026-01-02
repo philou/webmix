@@ -144,10 +144,15 @@ Note on Sanitization: `trafilatura` handles the heavy lifting of cleaning HTML (
         - [x] Remove duplicated tests
     - [x] Reuse table_of_content assertion in sitemap
 - [x] Add a scenario explanation free text for each scenario (ex in sitemap: "this site has a sitemap that does not contain contact page, and it is not in the ToC")
-- [ ] strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
-- [ ] Feat: make sure html table are well printed
 
 
 ### Parking
+- [ ] tests: strip out files from the sample data to have faster tests, or migrate to a smaller website, like https://philippe.bourgau.net/storexplore/
+- [ ] Feat: make sure html table are well printed
+    - find a page with a data table
+    - [ ] do either of the following:
+        - pre treatment of tables with pandoc or another more heavweight tool
+        - do a post-treatment of the output from trafilatura
+        - create a custom script for the specific sites that are problematic
 - [ ] Feat: add meta-data headers at the beginning of every file (source, title)
 - [ ] Feat: filter out remaining noise (there are some "|" remaining here and there, and also Next>> navigation)
